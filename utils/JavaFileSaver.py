@@ -28,3 +28,12 @@ class JavaFileSaver:
         file_to_save.write(self.file_content)
         
         file_to_save.close()
+        
+    def save_results(self,generattor):
+        dao_filename = generattor.get_file_name()
+        dao_content = generattor.get_content()
+        
+        self.set_file_title(dao_filename)
+        self.set_file_content(dao_content)
+        
+        self.save_file()

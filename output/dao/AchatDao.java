@@ -26,7 +26,7 @@ public class AchatDao {
 
       recording.set(results.getach_id());
       
-      recording.setAchMethode(results.getInt("ach_methode"));
+      recording.setAchMethode(results.getString("ach_methode"));
       recording.setAchDate(results.getString("ach_date"));
       recording.setAchUtilisateur(results.getInt("ach_utilisateur"));
       
@@ -54,7 +54,7 @@ public class AchatDao {
 
     recording.setId(recordings.getInt("ach_id"));
     
-    recording.setAchMethode(recordings.setInt("ach_methode"));
+    recording.setAchMethode(recordings.setString("ach_methode"));
     recording.setAchDate(recordings.setString("ach_date"));
     recording.setAchUtilisateur(recordings.setInt("ach_utilisateur"));
     
@@ -71,12 +71,12 @@ public class AchatDao {
       : "INSERT INTO achat(ach_methode,ach_date,ach_utilisateur) VALUES(?,?,?)";
 
     PreparedStatement querySave = connectionDatabase.prepareStatement(queryToExecute);
-    querySave.setInt(1, recordng.getAchMethode());
+    querySave.setString(1, recordng.getAchMethode());
     querySave.setString(2, recordng.getAchDate());
     querySave.setInt(3, recordng.getAchUtilisateur());
     
     if (weEditRecording)
-      querySave.setInt(4, recording.getId()); # (?) edit the number
+      querySave.setInt(4, recording.getId());
 
     querySave.executeUpdate();
   }

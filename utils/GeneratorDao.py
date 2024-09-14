@@ -16,16 +16,10 @@ class GeneratorDao():
         table_file = TableFile()
         table_file.open(self.file_path_data)
         
-        table_content = table_file.get_content_by_table()
+        tables_details = table_file.get_content_by_table()
         
-        for table_name, table_details in table_content.items():
-            dao_generator = TemplateDao(table_name, table_details)
-            dao_generator.render()
+        for table_name, table_details in tables_details.items():
+            generator = TemplateDao(table_name, table_details)
+            generator.render()
             
-            dao_filename = dao_generator.get_file_name()
-            dao_content = dao_generator.get_content()
-            
-            java_file_saver.set_file_title(dao_filename)
-            java_file_saver.set_file_content(dao_content)
-            
-            java_file_saver.save_file()
+            java_file_saver.save_results(generator)

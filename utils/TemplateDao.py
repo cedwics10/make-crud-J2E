@@ -1,7 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 
 from utils.TextParser import TextParser
-
+from utils.Template import Template
 
 '''
 class TemplateDao
@@ -16,21 +16,11 @@ class TemplateDao
 + render() : void
 + getContent() : void
 '''
-class TemplateDao():
+class TemplateDao(Template):
     def __init__(self, table_name, table_details):
-        self.env = Environment(loader=FileSystemLoader('templates'))
-
+        super().__init__(table_name, table_details)
+        
         self.template_path = "DaoClass.tpl"
-
-        self.table_name = table_name
-        self.file_name = table_name
-        
-        self.primary_key = table_details["primary_key"]
-        
-        self.columns_table = table_details["columns"]
-
-        self.template_parameters = {}
-        self.template_content = ""
         
     def __set_base_parameters(self):
         self.template_parameters.update({
@@ -68,23 +58,15 @@ class TemplateDao():
             "update_question_marks" : self.question_marks
         })
 
-    def __set_template_parameters(self):
+    def set_template_parameters(self):
+        self._Template__set_template_parameters()
+        
         self.__set_base_parameters()
         self.__set_column_paramters()
        
     def get_file_name(self):
         pascal_case_name = TextParser.toPascalCase(self.file_name)
         return  pascal_case_name
-
-    def render(self):
-        self.__set_template_parameters()
-
-        model_template = self.env.get_template(self.template_path)
-        
-        self.content = model_template.render(self.template_parameters);
-
-    def get_content(self):
-        return self.content
     
 
     

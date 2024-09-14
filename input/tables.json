@@ -1,10 +1,147 @@
 {
-    "achat": {
-        "primary_key" : "ach_id",
+    "administrateur": {
+        "primary_key": "adm_id",
         "columns": {
-            "ach_methode" : "int",
+            "adm_pseudo": "string",
+            "adm_passe": "string"
+        }
+    },
+    "utilisateur": {
+        "primary_key": "uti_id",
+        "columns": {
+            "uti_pseudo": "string",
+            "uti_mail": "string",
+            "uti_passe": "string",
+            "uti_nom": "string",
+            "uti_prenom": "string",
+            "uti_adresse": "string",
+            "uti_actif": "boolean"
+        }
+    },
+    "jeu": {
+        "primary_key": "jeu_id",
+        "columns": {
+            "jeu_titre": "string",
+            "jeu_prix": "double",
+            "jeu_description": "string",
+            "jeu_limite_age": "int",
+            "jeu_date_sortie": "string",
+            "jeu_developpeur": "string"
+        }
+    },
+    "categorie": {
+        "primary_key": "cat_id",
+        "columns": {
+            "cat_nom": "string"
+        }
+    },
+    "genre": {
+        "primary_key": "gen_id",
+        "columns": {
+            "gen_nom": "string"
+        }
+    },
+    "mode": {
+        "primary_key": "mod_id",
+        "columns": {
+            "mod_nom": "string"
+        }
+    },
+    "plateforme": {
+        "primary_key": "pla_id",
+        "columns": {
+            "pla_nom": "string"
+        }
+    },
+    "langue": {
+        "primary_key": "lan_id",
+        "columns": {
+            "lan_nom": "string"
+        }
+    },
+    "etre_tyoe": {
+        "primary_key": "etr_id",
+        "columns": {
+            "etr_genre": "int",
+            "etr_jeu": "int"
+        }
+    },
+    "collaborer": {
+        "primary_key" : "col_id",
+        "columns" : {
+            "col_mode": "int",
+            "col_jeu" : "int"
+        }
+    },
+    "appartenir": {
+        "primary_key" : "app_id",
+        "columns" : {
+            "app_jeu": "int",
+            "app_plateforme" : "int"
+        }
+    },
+    "illustration" : {
+        "primary_key" : "ill_id",
+        "columns" : {
+            "ill_type" : "string",
+            "ill_lien": "string",
+            "ill_ordre" : "int",
+            "ill_jeu" : "int",
+            "ill_date" : "string"
+        }
+    },
+    "commentaire" : {
+        "primary_key" : "com_id",
+        "columns":{
+            "com_utilisateur" : "int",
+            "com_jeu" : "int",
+            "com_titre" : "string",
+            "com_texte" : "string"
+        }
+    },
+    "evaluation" : {
+        "primary_key" : "eva_id",
+        "columns" : {
+            "eva_id" : "int",
+            "eva_note" : "int",
+            "eva_jeu" : "int",
+            "eva_utilisateur" : "int"
+        }
+    },
+    "se_renseigner" : {
+        "primary_key" : "ser_id",
+        "columns" : {
+            "ser_date" : "string",
+            "ser_nombre_visites" : "int",
+            "ser_jeu" : "int",
+            "ser_utilisateur" : "int"
+        }
+    },
+    "achat" : {
+        "primary_key" : "ach_id",
+        "columns" : {
+            "ach_methode" : "string",
             "ach_date" : "string",
             "ach_utilisateur" : "int"
         }
+    },
+    "detail" : {
+        "primary_key" : "det_id",
+        "columns" : {
+            "det_achat" : "int",
+            "det_jeu": "int",
+            "det_utilisateur" : "int",
+            "det_prix_unitaire" : "double",
+            "det_quantite" : "int"
+        }
+    },
+    "disponible" : {
+        "primary_key" : "dis_id",
+        "columns" : {
+            "dis_jeu" : "int",
+            "dis_plateforme":"int"
+        }
     }
+
+
 }
