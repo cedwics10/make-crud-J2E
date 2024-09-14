@@ -1,0 +1,10 @@
+{
+    "achat": {
+        "primary_key" : "ach_id",
+        "columns": {
+            "ach_methode" : "int",
+            "ach_date" : "string",
+            "ach_utilisateur" : "int"
+        }
+    }
+}

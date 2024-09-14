@@ -1,0 +1,64 @@
+/* Sert à séparer le dictionnaire contenant le contenu de chaque table */
+Class TableFile
+* attributs :
+- file_content
+- tables
+
++ __init(file_path) : TableFile
++ open()  : void
++ getTables() : array
++ fermer()  : void
+
+/* Sert à générer le contenu template D'UNE TABLE */
+class DaoTemplate
+* attributs :
+- table_details
+- jinja_templater
+- table_name
+- contenu
+
++ __construct(array table_details) : void
++ getTableName()
++ render() : void
++ getContenu() : void
+
+/* Sert à sauvegarder un contenu d'un fichier JAVA dans UN dossier défini */
+class JavaFileSaver
+* attritubts :
+- file_extension
+- file_title
+- file_content
+
+- folder_name
+
++ __construct (folder folder_name)
++ set_folder_name(str folder_name)
+
++ set_file_title(str file_title)
++ set_file_content(str file_content)
+
++ save_file()
+
+Séquence :
+
+
+java_file_saver = new JavaFileSaver()
+java_file_saver.set_folder_name('dao');
+
+file_tables = fichier->ouvrir()
+array_tables = file_tables->getTables()
+
+for(array_table in array_tables)
+{
+	dao_template = new DaoTemplate(arrayTable);
+	dao_template->render();
+	
+	java_file_saver.set_titre_fichier();
+	java_file_saver.set_contenu_fichier();
+
+	java_file_saver.save_data();
+	
+}
+
+
+
