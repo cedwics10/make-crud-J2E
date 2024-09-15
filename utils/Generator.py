@@ -1,10 +1,10 @@
 from utils.JavaFileSaver import JavaFileSaver
-from utils.TableFile import TableFile
-from utils.TemplateDao import TemplateDao
+from utils.TablesModel import TablesModel
+from utils.templates.TemplateDao import TemplateDao
 
 from constant.Constant import Constant
 
-class GeneratorDao():
+class Generator():
     def __init__(self) -> None:
         self.file_path_data = "input/tables.json"
         self.scripts_list = ["DaoTemplate"]
@@ -13,7 +13,7 @@ class GeneratorDao():
         java_file_saver = JavaFileSaver()
         java_file_saver.set_file_folder("dao")
         
-        table_file = TableFile()
+        table_file = TablesModel()
         table_file.open(self.file_path_data)
         
         tables_details = table_file.get_content_by_table()

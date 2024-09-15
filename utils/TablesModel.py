@@ -1,18 +1,18 @@
 '''
 /* Sert à séparer le contenu JSON de CHAQUE TABLE */
-Class TableFile
+Class TablesModel
 * attributs :
 - file_content
 - tables
 
-+ __init(file_path) : TableFile
++ __init(file_path) : TablesModel
 + open()  : void
 + getTables() : array
 + fermer()  : void
 '''
 import json
 
-class TableFile():
+class TablesModel():
     def __init__(self):
         self.content = ""
     

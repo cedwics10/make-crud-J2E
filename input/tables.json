@@ -59,7 +59,7 @@
             "lan_nom": "string"
         }
     },
-    "etre_tyoe": {
+    "etre_type": {
         "primary_key": "etr_id",
         "columns": {
             "etr_genre": "int",
