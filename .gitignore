@@ -1,2 +1,7 @@
 input
 output
+utils/templates/__pycache__
+utils/__pycache__
+constant/__pycache__
+.idea
+tests.py
