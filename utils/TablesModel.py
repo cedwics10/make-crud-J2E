@@ -1,24 +1,19 @@
-'''
-/* Sert à séparer le contenu JSON de CHAQUE TABLE */
-Class TablesModel
-* attributs :
-- file_content
-- tables
-
-+ __init(file_path) : TablesModel
-+ open()  : void
-+ getTables() : array
-+ fermer()  : void
-'''
 import json
 
+'''
+Class : TableModel
+Usage : used to open a JSON file
+containing the data of all tables.
+'''
+
 class TablesModel():
-    def __init__(self):
+    def __init__(self, file_path = ""):
         self.content = ""
+        self.file_path = file_path
     
-    def open(self, json_file_path):
-        with open(json_file_path, 'r') as file:
+    def open(self):
+        with open(self.file_path, 'r') as file:
             self.content = json.load(file)
     
-    def get_content_by_table(self):
+    def get_all(self):
         return self.content
