@@ -1,18 +1,16 @@
 package dao;
 
-public class <<entity>> {
-    {% for attribute, details in entities.items() %}
-    private {{details["type"}}} {{attribute}};
+public class {{entity}} {
+    private int {{primary_key}};
+    {% for name, details in attributes.items() %}private {{details["type"]}} {{name}};
     {% endfor %}
-
-    {% for attribute, details in entities.items() %}
+    {% for name, details in attributes.items() %}
     public {{details["type"]}} get{{details["pascal"]}}() {
-        return this.{{attribute}}
+        return this.{{name}}
     }
 
-    public void set{{details["pascal"]}}({{details["type"]}} {{attribute}}) {
-        this.{{attribute}} = {{attribute}}
+    public void set{{details["pascal"]}}({{details["type"]}} {{name}}) {
+        this.{{name}} = {{name}}
     }
     {% endfor %}
-
 }

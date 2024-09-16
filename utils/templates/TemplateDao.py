@@ -17,6 +17,9 @@ class TemplateDao
 + getContent() : void
 '''
 class TemplateDao(Template):
+
+    folder = "dao"
+
     def __init__(self, table_name, table_details):
         super().__init__(table_name, table_details)
         
