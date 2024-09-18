@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class {{class_name}} {
+
+    int ITEM_PER_PAGE = 20;
+
     public ArrayList<{{entity}}> getAll() throws SQLException {
       Database.makeConnection();
     Connection connectionDatabase = Database.getConnection();
@@ -15,6 +18,31 @@ public class {{class_name}} {
     ArrayList<{{entity}}> recordings = new ArrayList<{{entity}}>();
     Statement queryAll = connectionDatabase.createStatement();
     ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}}");
+
+    boolean noResultExists = !results.next();
+
+    if (noResultExists)
+      return new ArrayList<{{entity}}>
+
+    do {
+      {{entity}} recording = new {{entity}}();
+
+      recording.set{{camel_primary_key}}(results.get{{primary_key}}());
+      {% set index = 1 %}
+      {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type"]}}("{{name}}"));
+      {% set index = index + 1 %}{% endfor %}
+      recordings.add(recording);
+    } while (results.next());
+    return recordings;
+  }
+
+  public ArrayList<{{entity}}> getPage(int number) throws SQLException {
+      Database.makeConnection();
+    Connection connectionDatabase = Database.getConnection();
+
+    ArrayList<{{entity}}> recordings = new ArrayList<{{entity}}>();
+    Statement queryAll = connectionDatabase.createStatement();
+    ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}} LIMIT number*" + ITEM_PER_PAGE + ", " + ITEM_PER_PAGE);
 
     boolean noResultExists = !results.next();
 

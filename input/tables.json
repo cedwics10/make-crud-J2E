@@ -4,6 +4,10 @@
         "columns": {
             "adm_pseudo": "string",
             "adm_passe": "string"
+        },
+        "input_type" : {
+            "adm_pseudo" : "text",
+            "adm_passe" : "password"
         }
     },
     "utilisateur": {
@@ -16,6 +20,15 @@
             "uti_prenom": "string",
             "uti_adresse": "string",
             "uti_actif": "boolean"
+        },
+        "input_type" : {
+            "uti_pseudo": "text",
+            "uti_mail": "text",
+            "uti_passe": "password",
+            "uti_nom": "text",
+            "uti_prenom": "text",
+            "uti_adresse": "textarea",
+            "uti_actif": "radio"
         }
     },
     "jeu": {
@@ -27,36 +40,59 @@
             "jeu_limite_age": "int",
             "jeu_date_sortie": "string",
             "jeu_developpeur": "string"
+        },
+        "input_type": {
+            "jeu_titre": "text",
+            "jeu_prix": "number",
+            "jeu_description": "textarea",
+            "jeu_limite_age": "number",
+            "jeu_date_sortie": "date",
+            "jeu_developpeur": "string"
         }
     },
     "categorie": {
         "primary_key": "cat_id",
         "columns": {
             "cat_nom": "string"
+        },
+        "input_type": {
+            "cat_nom": "text"
         }
     },
     "genre": {
         "primary_key": "gen_id",
         "columns": {
             "gen_nom": "string"
+        },
+        "input_type" : {
+            "gen_nom" : "text"
         }
     },
     "mode": {
         "primary_key": "mod_id",
         "columns": {
             "mod_nom": "string"
+        },
+        "input_type" : {
+            "mod_nom" : "text"
         }
     },
     "plateforme": {
         "primary_key": "pla_id",
         "columns": {
             "pla_nom": "string"
+        },
+        "input_type" : {
+            "pla_nom" : "text"
         }
     },
     "langue": {
         "primary_key": "lan_id",
         "columns": {
             "lan_nom": "string"
+        },
+        "input_type" : {
+            "lan_nom" : "text"
         }
     },
     "etre_type": {
@@ -64,6 +100,10 @@
         "columns": {
             "etr_genre": "int",
             "etr_jeu": "int"
+        },
+        "input_type" : {
+            "etre_genre" : "text",
+            "etr_jeu": "select"            
         }
     },
     "collaborer": {
@@ -71,6 +111,10 @@
         "columns" : {
             "col_mode": "int",
             "col_jeu" : "int"
+        },
+        "input_type" : {
+            "col_mode" : "select",
+            "col_jeu": "select"            
         }
     },
     "appartenir": {
@@ -78,6 +122,10 @@
         "columns" : {
             "app_jeu": "int",
             "app_plateforme" : "int"
+        },
+        "input_type" : {
+            "app_jeu" : "select",
+            "app_plateforme": "select"            
         }
     },
     "illustration" : {
@@ -88,6 +136,13 @@
             "ill_ordre" : "int",
             "ill_jeu" : "int",
             "ill_date" : "string"
+        },
+        "input_type" : {
+            "ill_type" : "select",
+            "ill_lien": "text",
+            "ill_ordre" : "number",
+            "ill_jeu" : "select",
+            "ill_date" : "date"         
         }
     },
     "commentaire" : {
@@ -97,15 +152,25 @@
             "com_jeu" : "int",
             "com_titre" : "string",
             "com_texte" : "string"
+        },
+        "input_type" : {
+            "com_utilisateur" : "select",
+            "com_jeu" : "select",
+            "com_titre" : "input",
+            "com_texte" : "textarea"
         }
     },
     "evaluation" : {
         "primary_key" : "eva_id",
         "columns" : {
-            "eva_id" : "int",
             "eva_note" : "int",
             "eva_jeu" : "int",
             "eva_utilisateur" : "int"
+        },
+        "input_type" : {
+            "eva_note" : "number",
+            "eva_jeu" : "select",
+            "eva_utilisateur" : "select"
         }
     },
     "se_renseigner" : {
@@ -115,6 +180,12 @@
             "ser_nombre_visites" : "int",
             "ser_jeu" : "int",
             "ser_utilisateur" : "int"
+        },
+        "input_type" : {
+            "ser_date" : "date",
+            "ser_nombre_visites" : "int",
+            "ser_jeu" : "select",
+            "ser_utilisateur" : "select"
         }
     },
     "achat" : {
@@ -133,15 +204,19 @@
             "det_utilisateur" : "int",
             "det_prix_unitaire" : "double",
             "det_quantite" : "int"
+        },
+        "input_type" : {
+            "det_jeu": "select",
+            "det_utilisateur" : "select",
+            "det_prix_unitaire" : "double",
+            "det_quantite" : "number"
         }
     },
     "disponible" : {
         "primary_key" : "dis_id",
         "columns" : {
-            "dis_jeu" : "int",
-            "dis_plateforme":"int"
+            "dis_jeu" : "select",
+            "dis_plateforme":"select"
         }
     }
-
-
 }

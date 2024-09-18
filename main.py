@@ -1,4 +1,4 @@
-from utils.Generator import Generator
+from utils.App import App
 
-dao_generator = Generator()
+dao_generator = App()
 dao_generator.run()

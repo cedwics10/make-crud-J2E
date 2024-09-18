@@ -3,37 +3,55 @@ from abc import ABC, abstractmethod
 from jinja2 import Environment, FileSystemLoader
 from utils.TextParser import TextParser
 
-class Template(ABC):
 
+class Template(ABC):
     folder = ""
 
     @abstractmethod
     def __init__(self, table_name, table_details):
         self.env = Environment(loader=FileSystemLoader('templates'))
 
-        self.template_path = ""
+        self.parameters = {
+            "path": "DaoClass.tpl",
+            "output_folder": "Dao",
+
+            "table_name": table_name,
+            "file_name": "",
+
+            "primary_key": table_details["primary_key"],
+            "columns": table_details["columns"],
+
+        }
+
         self.template_parameters = {}
+        self.column_insert_details = {}
 
-        self.output_folder = ""
+        self.output = ""
 
-        self.table_name = table_name
-        self.file_name = table_name
+    def get_output(self):
+        return self.output
 
-        self.primary_key = table_details["primary_key"]
-        self.columns = table_details["columns"]
+    def set_output(self, value):
+        self.output = value
+    
+    def get_parameters(self):
+        return self.parameters
+        
+    def set_parameters(self, parameters):
+        self.parameters = parameters
 
     @classmethod
     def get_folder(cls):
         return cls.folder
-
+    
     def __set_base_parameters(self):
         self.template_parameters.update({
-            "entity": TextParser.toPascalCase(self.table_name),
-            "class_name": TextParser.toPascalCase(self.table_name) + "Dao",
+            "entity": TextParser.toPascalCase(self.parameters["table_name"]),
+            "class_name": TextParser.toPascalCase(self.parameters["table_name"]) + "Dao",
 
-            "table_name": self.table_name,
+            "table_name": self.parameters["table_name"],
 
-            "primary_key": self.primary_key
+            "primary_key": self.parameters["primary_key"]
         })
 
         self.column_insert_details = {
@@ -41,24 +59,20 @@ class Template(ABC):
                 "pascal": TextParser.toPascalCase(column_name),
                 "type": column_type.title(),
                 "index": 1  # to edit
-            } for column_name, column_type in self.columns.items()
+            } for column_name, column_type in self.parameters["columns"].items()
         }
 
     @abstractmethod
     def set_custom_parameters(self):
         pass
-
-    def get_content(self):
-        return self.content
-
-    def get_file_name(self):
-        pascal_case_name = TextParser.toPascalCase(self.file_name)
-        return pascal_case_name
-
+    
     def render(self):
         self.__set_base_parameters()
         self.set_custom_parameters()
 
-        model_template = self.env.get_template(self.template_path)
+        model_template = self.env.get_template(self.parameters["path"])
 
-        self.content = model_template.render(self.template_parameters)
+        try:
+            self.output = model_template.render(self.template_parameters)
+        except:
+            print("Couldn't load the output")

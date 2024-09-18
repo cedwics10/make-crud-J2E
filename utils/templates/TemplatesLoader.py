@@ -1,11 +1,13 @@
 """
 Class : TemplatesLoader
+Description : used to return the set of
+classes stored into the folder utils/template
 """
 class TemplatesLoader:
-    list = ["TemplateDao", "TemplateEntity"]
+    list = ["TemplateDao"]
 
     @classmethod
-    def get_all(cls):
+    def get_classes(cls):
         classes = []
 
         for template_name in TemplatesLoader.list:
