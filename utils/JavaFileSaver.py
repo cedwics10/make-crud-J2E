@@ -20,8 +20,7 @@ class JavaFileSaver:
         extension = f".{parameters["extension"]}" if parameters["extension"] != "" else ""
 
         saved_file_path = Constant.output_folder + "/" + parameters["folder"] + "/" + parameters["preffix"] + \
-            parameters["title"] + parameters["suffix"] + \
-            extension
+            parameters["title"] + parameters["suffix"] + extension
 
         contentOutput = generator.get_output()
 

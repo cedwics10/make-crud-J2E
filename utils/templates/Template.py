@@ -18,7 +18,7 @@ class Template(ABC):
             "columns": table_details["columns"],
         }
 
-        self.template_parameters = {}
+        self.output_parameters = {}
         self.column_insert_details = {}
 
         self.output = ""
@@ -28,19 +28,19 @@ class Template(ABC):
 
     def set_output(self, value):
         self.output = value
-    
+
     def get_parameters(self):
         return self.parameters
-        
+
     def set_parameters(self, parameters):
         self.parameters = parameters
 
     @classmethod
     def get_folder(cls):
         return cls.folder
-    
+
     def __set_base_parameters(self):
-        self.template_parameters.update({
+        self.output_parameters.update({
             "entity": TextParser.toPascalCase(self.parameters["table_name"]),
             "class_name": TextParser.toPascalCase(self.parameters["table_name"]) + "Dao",
 
@@ -49,18 +49,20 @@ class Template(ABC):
             "primary_key": self.parameters["primary_key"]
         })
 
-        self.column_insert_details = {
-            column_name: {
-                "pascal": TextParser.toPascalCase(column_name),
-                "type": column_type.title(),
-                "index": 1  # to edit
-            } for column_name, column_type in self.parameters["columns"].items()
-        }
+        self.output_parameters.update({
+            "insert_columns": {
+                column_name: {
+                    "pascal": TextParser.toPascalCase(column_name),
+                    "type": column_type.title(),
+                    "index": 1
+                } for column_name, column_type in self.parameters["columns"].items()
+            }
+        })
 
     @abstractmethod
     def set_custom_parameters(self):
         pass
-    
+
     def render(self):
         self.__set_base_parameters()
         self.set_custom_parameters()
@@ -68,6 +70,7 @@ class Template(ABC):
         model_template = self.env.get_template(self.parameters["path"])
 
         try:
-            self.output = model_template.render(self.template_parameters)
-        except:
-            print("Couldn't load the output")
+            self.output = model_template.render(self.output_parameters)
+        except Exception as error:
+            print("Couldn't generate the output of the template :")
+            print(error)

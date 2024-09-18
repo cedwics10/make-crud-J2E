@@ -14,6 +14,6 @@ class TemplateEntity(Template):
 
     def set_custom_parameters(self):
         super().set_custom_parameters()
-        self.template_parameters.update({
+        self.output_parameters.update({
             "attributes": self.column_insert_details
         })

@@ -43,9 +43,7 @@ class TemplateDao(Template):
         update_columns = "," . join(column_list)
         update_setters =  ", " . join(update_columns_setters)
 
-        self.template_parameters.update({
-            "insert_columns" :  self.column_insert_details,
-            
+        self.output_parameters.update({
             "update_columns" : update_columns,
             "update_elements" :update_setters,
 
