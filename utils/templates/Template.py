@@ -12,15 +12,10 @@ class Template(ABC):
         self.env = Environment(loader=FileSystemLoader('templates'))
 
         self.parameters = {
-            "path": "DaoClass.tpl",
-            "output_folder": "Dao",
-
             "table_name": table_name,
-            "file_name": "",
 
             "primary_key": table_details["primary_key"],
             "columns": table_details["columns"],
-
         }
 
         self.template_parameters = {}

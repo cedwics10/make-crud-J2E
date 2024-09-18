@@ -22,22 +22,17 @@ class TemplateDao(Template):
     def __init__(self, table_name, table_details):
         super().__init__(table_name, table_details)
 
-        self.parameters = {
+        self.parameters.update({
             "path": "DaoClass.tpl",
 
-            "table_name": table_name,
-            
             "folder" : "dao",
 
             "preffix": "Dao",
             "title": TextParser.toPascalCase(table_name),
             "suffix": "",
 
-            "extension" : ".java",
-
-            "primary_key": table_details["primary_key"],
-            "columns": table_details["columns"],
-        }
+            "extension" : "java"
+        })
     
     def set_custom_parameters(self):
         column_list = [column_name for column_name in self.parameters["columns"].keys()]

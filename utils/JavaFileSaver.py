@@ -3,8 +3,8 @@ from constant.Constant import Constant
 
 class JavaFileSaver:
 
-    def __init__(self, file_folder="dao"):
-        self.folder = "dao"
+    def __init__(self, folder=""):
+        self.foldder = folder
         self.parameters = {
         }
 
@@ -17,14 +17,11 @@ class JavaFileSaver:
     def save_output(self, generator):
         parameters = generator.parameters
 
-
-
-        extension = "." + \
-            parameters["suffix"] if parameters["suffix"] != "" else ""
+        extension = f".{parameters["extension"]}" if parameters["extension"] != "" else ""
 
         saved_file_path = Constant.output_folder + "/" + parameters["folder"] + "/" + parameters["preffix"] + \
             parameters["title"] + parameters["suffix"] + \
-            parameters["extension"]
+            extension
 
         contentOutput = generator.get_output()
 
