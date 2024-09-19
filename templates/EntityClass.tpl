@@ -2,10 +2,10 @@ package dao;
 
 public class {{entity}} {
     private int {{primary_key}};
-    {% for name, details in attributes.items() %}private {{details["type"]}} {{name}};
+    {% for name, details in insert_columns.items() %}private {{details["type"]}} {{name}};
     {% endfor %}
-    {% for name, details in attributes.items() %}
-    public {{details["type"]}} get{{details["pascal"]}}() {
+    {% for name, details in insert_columns.items() %}
+    public {{details["type"] | lower}} get{{details["pascal"]}}() {
         return this.{{name}}
     }
 

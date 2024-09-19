@@ -10,30 +10,36 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Index
  */
-@WebServlet("/Admin{{entity}}")
-public class Admin{{entity}} extends HttpServlet {
+@WebServlet("/Admin{{class_name}}")
+public class Admin{{class_name}} extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public /Admin{{class_name}}() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = 0;
 
-        int pageNumber = request.getParameter("page") != null ? request.getParameter("page") : 1
+		try
+		{
+			page = Integer.parseInt(request.getParameter("page");
+		} 
+		catch (NumberFormatException ex)
+		{
+			page = 0;
+		}
 
-        ArrayList<{{entity}}> allRecords = new {{class_name}}Dao().getPage(pageNumber)
-        
-		request.setAttribute("records", allRecords);
-        
-		request.getRequestDispatcher("admin_select_{{table_name}}.jsp").forward(request, response);
+		{{class_name}}Dao model = new {{class_name}}Dao();
+		ArrayList<{{class_name}}> records = model.getPage(page);
+
+		request.setParameter("records", records);
 	}
 
 	
@@ -41,7 +47,7 @@ public class Admin{{entity}} extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		/* RIEN */
 	}
 
 }

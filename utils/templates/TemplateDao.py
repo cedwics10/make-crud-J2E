@@ -21,7 +21,6 @@ class TemplateDao(Template):
 
     def __init__(self, table_name, table_details):
         super().__init__(table_name, table_details)
-
         self.parameters.update({
             "path": "DaoClass.tpl",
 

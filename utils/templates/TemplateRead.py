@@ -2,17 +2,17 @@ from utils.templates.Template import Template
 from utils.TextParser import TextParser
 
 
-class TemplateEntity(Template):
+class TemplateRead(Template):
     folder = "entity"
 
     def __init__(self, table_name, table_details):
         super().__init__(table_name, table_details)
         self.parameters.update({
-            "path": "EntityClass.tpl",
+            "path": "SelectRoute.tpl",
 
-            "folder" : "entity",
+            "folder" : "route",
 
-            "preffix": "",
+            "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),
             "suffix": "",
 

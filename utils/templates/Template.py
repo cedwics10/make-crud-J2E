@@ -42,7 +42,7 @@ class Template(ABC):
     def __set_base_parameters(self):
         self.output_parameters.update({
             "entity": TextParser.toPascalCase(self.parameters["table_name"]),
-            "class_name": TextParser.toPascalCase(self.parameters["table_name"]) + "Dao",
+            "class_name": self.parameters["preffix"] + TextParser.toPascalCase(self.parameters["table_name"]) + self.parameters["suffix"],
 
             "table_name": self.parameters["table_name"],
 

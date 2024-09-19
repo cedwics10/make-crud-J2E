@@ -24,6 +24,6 @@ class JavaFileSaver:
 
         contentOutput = generator.get_output()
 
-        fileOuput = open(saved_file_path, "a")
+        fileOuput = open(saved_file_path, "w+")
         fileOuput.write(contentOutput)
         fileOuput.close()
