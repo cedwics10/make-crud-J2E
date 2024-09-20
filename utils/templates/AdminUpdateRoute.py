@@ -1,20 +1,19 @@
 from utils.templates.Template import Template
 from utils.TextParser import TextParser
 
-
-class Entity(Template):
+class AdminCreateRoute(Template):
     folder = "entity"
 
     def __init__(self, table_name, table_details):
         super().__init__(table_name, table_details)
         self.parameters.update({
-            "path": "Entity.tpl",
+            "path": "adminCreateRoute.tpl",
 
-            "folder" : "entity",
+            "folder" : "route",
 
-            "preffix": "",
+            "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),
-            "suffix": "",
+            "suffix": "New",
 
             "extension" : "java"
         })

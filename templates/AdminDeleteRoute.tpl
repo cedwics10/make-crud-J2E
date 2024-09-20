@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Index
  */
-@WebServlet("/{{class_name}}")
-public class {{class_name}} extends HttpServlet {
+@WebServlet("/Admin{{entity}}Delete")
+public class Admin{{entity}}Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public {{class_name}}() {
+    public Admin{{entity}}Delete() {
         super();
     }
 
@@ -25,21 +25,19 @@ public class {{class_name}} extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int page = 0;
-
 		try
 		{
-			page = Integer.parseInt(request.getParameter("page"));
+			int index = Integer.parseInt(request.getParameter("page"));
+			
+			Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
+			dao{{entity}}.delete(index);
+
+			response.sendRedirect("Admin{{entity}}");
 		} 
 		catch (NumberFormatException ex)
 		{
-			page = 0;
+			response.sendRedirect("AdminIndex");
 		}
-
-		{{class_name}}Dao model = new {{class_name}}Dao();
-		ArrayList<{{class_name}}> records = model.getPage(page);
-
-		request.setParameter("records", records);
 	}
 
 	
