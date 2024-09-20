@@ -16,7 +16,7 @@ class TemplateDao
 + render() : void
 + getContent() : void
 '''
-class TemplateDao(Template):
+class Dao(Template):
     folder = "dao"
 
     def __init__(self, table_name, table_details):

@@ -4,7 +4,7 @@ Description : used to return the set of
 classes stored into the folder utils/template
 """
 class TemplatesLoader:
-    list = ["TemplateDao", "TemplateEntity", "TemplateRead"]
+    list = ["Dao", "Entity", "AdminReadRoute"]
 
     @classmethod
     def get_classes(cls):

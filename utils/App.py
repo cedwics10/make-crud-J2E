@@ -3,7 +3,6 @@ from constant.Constant import Constant
 from utils.JavaFileSaver import JavaFileSaver
 from utils.TablesModel import TablesModel
 
-from utils.templates.TemplateDao import TemplateDao
 from utils.templates.TemplatesLoader import TemplatesLoader
 
 class App:

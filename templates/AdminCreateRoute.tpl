@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Index
  */
-@WebServlet("/Admin{{class_name}}")
-public class Admin{{class_name}} extends HttpServlet {
+@WebServlet("/{{class_name}}")
+public class {{class_name}} extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public /Admin{{class_name}}() {
+    public /inputs{{class_name}}() {
         super();
     }
 
@@ -29,7 +29,7 @@ public class Admin{{class_name}} extends HttpServlet {
 
 		try
 		{
-			page = Integer.parseInt(request.getParameter("page");
+			page = Integer.parseInt(request.getParameter("page"));
 		} 
 		catch (NumberFormatException ex)
 		{

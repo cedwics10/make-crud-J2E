@@ -2,7 +2,7 @@ from utils.templates.Template import Template
 from utils.TextParser import TextParser
 
 
-class TemplateEntity(Template):
+class Entity(Template):
     folder = "entity"
 
     def __init__(self, table_name, table_details):
