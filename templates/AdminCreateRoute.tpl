@@ -30,31 +30,33 @@ public class {{class_name}} extends HttpServlet {
 		try
 		{
 			id = Integer.parseInt(request.getParameter("id"));
-			boolean submitButtonPressed = request.getParameter("submit") != null;
-
-			if(submitButtonPressed)
-			{
-				{{entity}} entry = new {{entity}}();
-
-				entry.set{{pascal_primary_key}}(id);
-				{% for name, details in insert_columns.items() %}
-				entry.set{{details.pascal}}(request.getAttribute("{{name}}"));{% endfor %}
-
-				{{entity}}Dao dao = new {{entity}}Dao();
-				dao.insert(entry);
-
-				response.sendRedirect("AdminTruc");
-			}
 		} 
-		catch (NumberFormatException ex)
+		catch(NumberFormatException ex)
 		{
 			id = 0;
 		}
 
-		{{entity}}Dao model = new {{entity}}Dao();
-		ArrayList<{{entity}}> records = model.getPage(page);
+		boolean submitButtonPressed = request.getParameter("submit") != null;
 
-		request.setParameter("records", records);
+		if(submitButtonPressed)
+		{
+			{{entity}} entry = new {{entity}}();
+
+			entry.set{{pascal_primary_key}}(id);
+			{% for name, details in insert_columns.items() %}
+			entry.set{{details.pascal}}(request.getAttribute("{{name}}"));{% endfor %}
+
+			{{entity}}Dao dao = new {{entity}}Dao();
+			dao.insert(entry);
+
+			response.sendRedirect("{{table_name}}");
+			return;
+		}
+
+		{{entity}}Dao dao{{entity}} = new {{entity}}Dao();
+		record = dao{{entity}}.get(id)
+
+		request.setParameter("record", record);
 	}
 
 	
