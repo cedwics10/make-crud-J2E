@@ -5,7 +5,7 @@ classes stored into the folder utils/template
 """
 class TemplatesLoader:
     list = ["Dao", "Entity", 
-            # "AdminCreateRoute",
+            "AdminCreateRoute",
             "AdminReadRoute",
             "AdminDeleteRoute"]
 

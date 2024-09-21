@@ -14,7 +14,7 @@ class AdminCreateRoute(Template):
             "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),
             "suffix": "New",
-
+            
             "extension" : "java"
         })
 

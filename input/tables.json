@@ -5,7 +5,7 @@
             "adm_pseudo": "string",
             "adm_passe": "string"
         },
-        "inputs" : {
+        "input" : {
             "adm_pseudo" : {
                 "type" : "text"
             },
@@ -25,7 +25,7 @@
             "uti_adresse": "string",
             "uti_actif": "boolean"
         },
-        "inputs" : {
+        "input" : {
             "uti_pseudo": {
                 "type" : "text"
             },
@@ -61,7 +61,7 @@
             "jeu_date_sortie": "string",
             "jeu_developpeur": "string"
         },
-        "inputs": {
+        "input": {
             "jeu_titre": {
                 "type" : "text"
             },
@@ -87,7 +87,7 @@
         "columns": {
             "cat_nom": "string"
         },
-        "inputs": {
+        "input": {
             "cat_nom": {
                 "type" : "text"
             }
@@ -98,7 +98,7 @@
         "columns": {
             "gen_nom": "string"
         },
-        "inputs" : {
+        "input" : {
             "gen_nom" : {
                 "type" : "text"
             }
@@ -109,7 +109,7 @@
         "columns": {
             "mod_nom": "string"
         },
-        "inputs" : {
+        "input" : {
             "mod_nom" : {
                 "type" : "text"
             }
@@ -120,7 +120,7 @@
         "columns": {
             "pla_nom": "string"
         },
-        "inputs" : {
+        "input" : {
             "pla_nom" : {
                 "type" : "text"
             }
@@ -131,7 +131,7 @@
         "columns": {
             "lan_nom": "string"
         },
-        "inputs" : {
+        "input" : {
             "lan_nom" : {
                 "type" : "text"
             }
@@ -143,12 +143,13 @@
             "etr_genre": "int",
             "etr_jeu": "int"
         },
-        "inputs" : {
+        "input" : {
             "etre_genre" : {
                 "type" : "text"
             },
             "etr_jeu": {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             }
         }
     },
@@ -158,12 +159,14 @@
             "col_mode": "int",
             "col_jeu" : "int"
         },
-        "inputs" : {
+        "input" : {
             "col_mode" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "mode"
             },
             "col_jeu": {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             }
         }
     },
@@ -173,12 +176,14 @@
             "app_jeu": "int",
             "app_plateforme" : "int"
         },
-        "inputs" : {
+        "input" : {
             "app_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             },
             "app_plateforme" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "pla"
             }   
         }
     },
@@ -191,12 +196,14 @@
             "ill_jeu" : "int",
             "ill_date" : "string"
         },
-        "inputs" : {
+        "input" : {
             "ill_type" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "type"
             },
             "ill_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             },
             "ill_lien": {
                 "type" : "text"
@@ -217,12 +224,14 @@
             "com_titre" : "string",
             "com_texte" : "string"
         },
-        "inputs" : {
+        "input" : {
             "com_utilisateur" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "utilisateur"
             },
             "com_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             },
             "com_titre" : {
                 "type" : "input"
@@ -239,15 +248,17 @@
             "eva_jeu" : "int",
             "eva_utilisateur" : "int"
         },
-        "inputs" : {
+        "input" : {
             "eva_note" : {
                 "type" : "number"
             },
             "eva_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             },
             "eva_utilisateur" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "utilisateur"
             }
         }
     },
@@ -259,7 +270,7 @@
             "ser_jeu" : "int",
             "ser_utilisateur" : "int"
         },
-        "inputs" : {
+        "input" : {
             "ser_date" : {
                 "type" : "date"
             },
@@ -267,10 +278,12 @@
                 "type" : "number"
             },
             "ser_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             },
             "ser_utilisateur": {
-                "type" : "select"
+                "type" : "select",
+                "table" : "utilisateur"
             }
         }
     },
@@ -281,7 +294,7 @@
             "ach_date" : "string",
             "ach_utilisateur" : "int"
         },
-        "inputs" : {
+        "input" : {
             "ach_method" : {
                 "type" : "text"
             },
@@ -289,7 +302,8 @@
                 "type" : "date"
             },
             "ach_utilisateur" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "utilisateur"
             }
         }
     },
@@ -302,12 +316,14 @@
             "det_prix_unitaire" : "double",
             "det_quantite" : "int"
         },
-        "inputs" : {
+        "input" : {
             "det_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "jeu"
             },
             "det_utilisateur" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "utilisateur"
             },
             "det_prix_unitaire" : {
                 "type" : "number",
@@ -326,10 +342,12 @@
         },
         "input" : {
             "dis_jeu" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "plateforme"
             },
             "dis_plateforme" : {
-                "type" : "select"
+                "type" : "select",
+                "table" : "plateforme"
             }
         }
     }

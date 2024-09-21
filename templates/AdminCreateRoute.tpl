@@ -17,7 +17,7 @@ public class {{class_name}} extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public /inputs{{class_name}}() {
+    public {{class_name}}() {
         super();
     }
 
@@ -25,19 +25,34 @@ public class {{class_name}} extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int page = 0;
+		int id = 0;
 
 		try
 		{
-			page = Integer.parseInt(request.getParameter("page"));
+			id = Integer.parseInt(request.getParameter("id"));
+			boolean submitButtonPressed = request.getParameter("submit") != null;
+
+			if(submitButtonPressed)
+			{
+				{{entity}} entry = new {{entity}}();
+
+				entry.set{{pascal_primary_key}}(id);
+				{% for name, details in insert_columns.items() %}
+				entry.set{{details.pascal}}(request.getAttribute("{{name}}"));{% endfor %}
+
+				{{entity}}Dao dao = new {{entity}}Dao();
+				dao.insert(entry);
+
+				response.sendRedirect("AdminTruc");
+			}
 		} 
 		catch (NumberFormatException ex)
 		{
-			page = 0;
+			id = 0;
 		}
 
-		{{class_name}}Dao model = new {{class_name}}Dao();
-		ArrayList<{{class_name}}> records = model.getPage(page);
+		{{entity}}Dao model = new {{entity}}Dao();
+		ArrayList<{{entity}}> records = model.getPage(page);
 
 		request.setParameter("records", records);
 	}

@@ -16,6 +16,7 @@ class Template(ABC):
 
             "primary_key": table_details["primary_key"],
             "columns": table_details["columns"],
+            "input" : table_details["input"]
         }
 
         self.output_parameters = {}
@@ -41,12 +42,12 @@ class Template(ABC):
 
     def __set_base_parameters(self):
         self.output_parameters.update({
+            "table_name": self.parameters["table_name"],
             "entity": TextParser.toPascalCase(self.parameters["table_name"]),
             "class_name": self.parameters["preffix"] + TextParser.toPascalCase(self.parameters["table_name"]) + self.parameters["suffix"],
 
-            "table_name": self.parameters["table_name"],
-
-            "primary_key": self.parameters["primary_key"]
+            "primary_key": self.parameters["primary_key"],
+            "pascal_primary_key": TextParser.toPascalCase(self.parameters["primary_key"])
         })
 
         self.output_parameters.update({
@@ -56,7 +57,8 @@ class Template(ABC):
                     "type": column_type.title(),
                     "index": 1
                 } for column_name, column_type in self.parameters["columns"].items()
-            }
+            },
+            "input" : self.parameters["input"]
         })
 
     @abstractmethod
@@ -72,5 +74,5 @@ class Template(ABC):
         try:
             self.output = model_template.render(self.output_parameters)
         except Exception as error:
-            print("Couldn't generate the output of the template :")
+            print("Couldn't generate the output of the template.")
             print(error)
