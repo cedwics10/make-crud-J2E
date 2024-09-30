@@ -14,3 +14,10 @@ class TextParser():
 
         camel_case_text = "" . join(words)
         return camel_case_text
+    
+    @staticmethod
+    def setTypeCase(type):
+        if type.lower() == 'string':
+            return "String"
+        else:
+            return type

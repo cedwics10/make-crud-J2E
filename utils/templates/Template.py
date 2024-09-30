@@ -54,7 +54,8 @@ class Template(ABC):
             "insert_columns": {
                 column_name: {
                     "pascal": TextParser.toPascalCase(column_name),
-                    "type": column_type.title(),
+                    "type": TextParser.toCamelCase(column_type),
+                    "type_min" : TextParser.setTypeCase(column_type),
                     "index": 1
                 } for column_name, column_type in self.parameters["columns"].items()
             },
