@@ -47,6 +47,7 @@ class Template(ABC):
             "class_name": self.parameters["preffix"] + TextParser.toPascalCase(self.parameters["table_name"]) + self.parameters["suffix"],
 
             "primary_key": self.parameters["primary_key"],
+            "camel_primary_key" : TextParser.toCamelCase(self.parameters["primary_key"]),
             "pascal_primary_key": TextParser.toPascalCase(self.parameters["primary_key"])
         })
 

@@ -29,7 +29,7 @@ public class {{class_name}}
     do {
       {{entity}} recording = new {{entity}}();
 
-      recording.set{{camel_primary_key}}(results.getInt("{{primary_key}}"));
+      recording.set{{pascal_primary_key}}(results.getInt("{{primary_key}}"));
       {% set index = 1 %}
       {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type"]}}("{{name}}"));
       {% set index = index + 1 %}{% endfor %}
@@ -77,7 +77,7 @@ public class {{class_name}}
 
     boolean noRecordingFound = !recordings.next();
 
-    Inscription recording = new Inscription();
+    {{entity}} recording = new {{entity}}();
 
     if (noRecordingFound) return recording;
 
