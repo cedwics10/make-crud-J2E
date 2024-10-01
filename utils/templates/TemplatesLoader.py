@@ -3,11 +3,11 @@ Class : TemplatesLoader
 Description : used to return the set of
 classes stored into the folder utils/template
 """
+
+from constant.Constant import Constant
+
 class TemplatesLoader:
-    list = ["Dao", "Entity", 
-            "AdminCreateRoute",
-            "AdminReadRoute",
-            "AdminDeleteRoute"]
+    list = Constant.scripts_list
 
     @classmethod
     def get_classes(cls):

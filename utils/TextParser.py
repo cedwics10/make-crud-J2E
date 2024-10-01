@@ -1,3 +1,8 @@
+'''
+Class : TextParser
+Descirption : util class to parse some
+basic operations on texts
+'''
 class TextParser():
     @staticmethod
     def toPascalCase(snake_case_text):
