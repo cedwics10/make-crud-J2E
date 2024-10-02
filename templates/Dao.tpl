@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dao.{{entity}};
+
 public class {{class_name}} 
 {
   int ITEM_PER_PAGE = 20;

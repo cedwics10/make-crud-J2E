@@ -1,11 +1,16 @@
-package Controllers;
+package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.Dao{{entity}};
+import dao.{{entity}};
 
 /**
  * Servlet implementation class Index
@@ -36,8 +41,8 @@ public class {{class_name}} extends HttpServlet {
 			page = 0;
 		}
 
-		{{class_name}}Dao model = new {{class_name}}Dao();
-		ArrayList<{{class_name}}> records = model.getPage(page);
+		Dao{{entity}} model = new Dao{{entity}}();
+		ArrayList<{{entity}}> records = model.getPage(page);
 
 		request.setParameter("records", records);
 	}

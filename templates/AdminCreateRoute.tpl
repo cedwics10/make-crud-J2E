@@ -1,14 +1,16 @@
-package Controllers;
+package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import dao.Dao{{entity}}
+import dao.Dao{{entity}};
+import dao.{{entity}};
 
 /**
  * Servlet implementation class Index
@@ -49,7 +51,7 @@ public class {{class_name}} extends HttpServlet {
 			{% for name, details in insert_columns.items() %}
 			entry.set{{details.pascal}}(request.getAttribute("{{name}}"));{% endfor %}
 
-			{{entity}}Dao dao = new {{entity}}Dao();
+			Dao{{entity}} dao = new Dao{{entity}}();
 			dao.save(entry);
 
 			response.sendRedirect("{{route_read}}");
@@ -57,7 +59,7 @@ public class {{class_name}} extends HttpServlet {
 		}
 
 		Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
-		record = dao{{entity}}.get(id);
+		{{entity}} record = dao{{entity}}.get(id);
 
 		request.setParameter("record", record);
 	}

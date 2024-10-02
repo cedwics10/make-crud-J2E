@@ -21,6 +21,6 @@ class AdminCreateRoute(Template):
     def set_custom_parameters(self):
         super().set_custom_parameters()
         self.output_parameters.update({
-            "route_read" : TextParser.toPascalCase(self.parameters['title'])
+            "route_read" : self.parameters["preffix"] + TextParser.toPascalCase(self.parameters['title'])
 
         })
