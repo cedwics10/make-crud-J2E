@@ -37,6 +37,32 @@ public class {{class_name}}
     return recordings;
   }
 
+  public ArrayList<{{entity}}> getPage(int page) throws SQLException 
+  {
+    Database.makeConnection();
+    Connection connectionDatabase = Database.getConnection();
+
+    ArrayList<{{entity}}> recordings = new ArrayList<{{entity}}>();
+    Statement queryAll = connectionDatabase.createStatement();
+    ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}} ORDER BY id ASC LIMIT " + (page * ITEM_PER_PAGE) + ", " + ITEM_PER_PAGE);
+
+    boolean noResultExists = !results.next();
+
+    if (noResultExists)
+      return new ArrayList<{{entity}}>();
+
+    do {
+      {{entity}} recording = new {{entity}}();
+
+      recording.set{{pascal_primary_key}}(results.getInt("{{primary_key}}"));
+      {% set index = 1 %}
+      {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type_pascal"]}}("{{name}}"));
+      {% set index = index + 1 %}{% endfor %}
+      recordings.add(recording);
+    } while (results.next());
+    return recordings;
+  }
+
   public {{entity}} getById(int id) throws SQLException {
     Connection connectionDatabase = Database.getConnection();
 

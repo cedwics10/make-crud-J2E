@@ -21,5 +21,6 @@ class AdminCreateRoute(Template):
     def set_custom_parameters(self):
         super().set_custom_parameters()
         self.output_parameters.update({
-            "attributes": self.column_insert_details
+            "route_read" : TextParser.toPascalCase(self.parameters['title'])
+
         })

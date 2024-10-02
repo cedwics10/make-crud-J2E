@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import dao.Dao{{entity}}
+
 /**
  * Servlet implementation class Index
  */
@@ -47,14 +50,14 @@ public class {{class_name}} extends HttpServlet {
 			entry.set{{details.pascal}}(request.getAttribute("{{name}}"));{% endfor %}
 
 			{{entity}}Dao dao = new {{entity}}Dao();
-			dao.insert(entry);
+			dao.save(entry);
 
-			response.sendRedirect("{{table_name}}");
+			response.sendRedirect("{{route_read}}");
 			return;
 		}
 
-		{{entity}}Dao dao{{entity}} = new {{entity}}Dao();
-		record = dao{{entity}}.get(id)
+		Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
+		record = dao{{entity}}.get(id);
 
 		request.setParameter("record", record);
 	}
@@ -64,7 +67,7 @@ public class {{class_name}} extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* RIEN */
+		
 	}
 
 }

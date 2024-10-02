@@ -3,7 +3,12 @@ from abc import ABC, abstractmethod
 from jinja2 import Environment, FileSystemLoader
 from utils.TextParser import TextParser
 
-
+'''
+Class : Template
+Description : this class is abstract.
+It gives the base to set the details
+of the template
+'''
 class Template(ABC):
     folder = ""
 
