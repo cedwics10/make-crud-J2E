@@ -1,5 +1,5 @@
 class Constant:
-    file_path_data = "input/tables.json"
+    input_path = "input/tables.json"
     output_folder = "output"
 
     scripts_list = ["Dao", "Entity", 

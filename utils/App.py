@@ -9,7 +9,7 @@ class App:
     def run(self):
         java_file_saver = JavaFileSaver()
         
-        table_model = TablesModel(Constant.file_path_data)
+        table_model = TablesModel(Constant.input_path)
         tables_details = table_model.get_all()
 
         for template_class in TemplatesLoader.get_classes():
