@@ -1,6 +1,7 @@
-package Controller;
+package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -42,9 +43,19 @@ public class {{class_name}} extends HttpServlet {
 		}
 
 		Dao{{entity}} model = new Dao{{entity}}();
-		ArrayList<{{entity}}> records = model.getPage(page);
 
-		request.setParameter("records", records);
+		ArrayList<{{entity}}> records = new ArrayList<{{entity}}>();
+
+		try
+		{
+			records = model.getPage(page);
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Error : " + e.getMessage());
+		}
+
+		request.setAttribute("records", records);
 	}
 
 	

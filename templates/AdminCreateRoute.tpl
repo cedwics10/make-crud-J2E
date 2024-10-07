@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -47,9 +48,9 @@ public class {{class_name}} extends HttpServlet {
 		{
 			{{entity}} entry = new {{entity}}();
 
-			entry.set{{pascal_primary_key}}(id);
-			{% for name, details in insert_columns.items() %}
-			entry.set{{details.pascal}}(request.getAttribute("{{name}}"));{% endfor %}
+			entry.set{{pascal_primary_key}}(id);{% for name, details in insert_columns.items() %}
+			{% if details.type == "int" %}entry.set{{details.pascal}}(Integer.parseInt(request.getParameter("{{name}}")));
+			{% else %}entry.set{{details.pascal}}(request.getParameter("{{name}}"));{% endif %}{% endfor %}
 
 			Dao{{entity}} dao = new Dao{{entity}}();
 			dao.save(entry);
@@ -59,9 +60,19 @@ public class {{class_name}} extends HttpServlet {
 		}
 
 		Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
-		{{entity}} record = dao{{entity}}.get(id);
+		
+		{{entity}} record = new {{entity}}();
 
-		request.setParameter("record", record);
+		try
+		{
+			record = dao{{entity}}.getById(id);
+		}
+		catch(SQLException e)
+		{
+			System.out.println("ERROR : " + e.getMessage());
+		}
+
+		request.setAttribute("record", record);
 	}
 
 	

@@ -13,30 +13,40 @@ public class {{class_name}}
 {
   int ITEM_PER_PAGE = 20;
 
-  public ArrayList<{{entity}}> getAll() throws SQLException 
+  public ArrayList<{{entity}}> getAll()
   {
     Database.makeConnection();
     Connection connectionDatabase = Database.getConnection();
 
     ArrayList<{{entity}}> recordings = new ArrayList<{{entity}}>();
-    Statement queryAll = connectionDatabase.createStatement();
-    ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}}");
 
-    boolean noResultExists = !results.next();
+    try {    
+        Statement queryAll = connectionDatabase.createStatement();
 
-    if (noResultExists)
-      return new ArrayList<{{entity}}>();
+        ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}}");
 
-    do {
-      {{entity}} recording = new {{entity}}();
+        boolean noResultExists = !results.next();
 
-      recording.set{{pascal_primary_key}}(results.getInt("{{primary_key}}"));
-      {% set index = 1 %}
-      {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type_pascal"]}}("{{name}}"));
-      {% set index = index + 1 %}{% endfor %}
-      recordings.add(recording);
-    } while (results.next());
-    return recordings;
+        if (noResultExists)
+          return new ArrayList<{{entity}}>();
+
+        do {
+          {{entity}} recording = new {{entity}}();
+
+          recording.set{{pascal_primary_key}}(results.getInt("{{primary_key}}"));
+          {% set index = 1 %}
+          {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type_pascal"]}}("{{name}}"));
+          {% set index = index + 1 %}{% endfor %}
+          recordings.add(recording);
+        } while (results.next());
+        return recordings;
+
+    }
+    catch(SQLException e)
+    {
+        System.out.println("Error : " + e.getMessage());
+        return new ArrayList<{{entity}}>();
+    }
   }
 
   public ArrayList<{{entity}}> getPage(int page) throws SQLException 
@@ -45,51 +55,70 @@ public class {{class_name}}
     Connection connectionDatabase = Database.getConnection();
 
     ArrayList<{{entity}}> recordings = new ArrayList<{{entity}}>();
-    Statement queryAll = connectionDatabase.createStatement();
-    ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}} ORDER BY id ASC LIMIT " + (page * ITEM_PER_PAGE) + ", " + ITEM_PER_PAGE);
 
-    boolean noResultExists = !results.next();
+    try
+    {
+      Statement queryAll = connectionDatabase.createStatement();
+      ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}} ORDER BY id ASC LIMIT " + (page * ITEM_PER_PAGE) + ", " + ITEM_PER_PAGE);
 
-    if (noResultExists)
-      return new ArrayList<{{entity}}>();
+      boolean noResultExists = !results.next();
 
-    do {
-      {{entity}} recording = new {{entity}}();
+      if (noResultExists)
+        return new ArrayList<{{entity}}>();
 
-      recording.set{{pascal_primary_key}}(results.getInt("{{primary_key}}"));
-      {% set index = 1 %}
-      {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type_pascal"]}}("{{name}}"));
-      {% set index = index + 1 %}{% endfor %}
-      recordings.add(recording);
-    } while (results.next());
-    return recordings;
+      do {
+        {{entity}} recording = new {{entity}}();
+
+        recording.set{{pascal_primary_key}}(results.getInt("{{primary_key}}"));
+        {% set index = 1 %}
+        {% for name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(results.get{{details["type_pascal"]}}("{{name}}"));
+        {% set index = index + 1 %}{% endfor %}
+        recordings.add(recording);
+      } while (results.next());
+      return recordings;
+    }
+    catch(SQLException e)
+    {
+        System.out.println("Error : " + e.getMessage());
+        return new ArrayList<{{entity}}>();
+    }
+
   }
 
-  public {{entity}} getById(int id) throws SQLException {
+  public {{entity}} getById(int id) {
+
     Connection connectionDatabase = Database.getConnection();
 
-    PreparedStatement queryById = connectionDatabase.prepareStatement(
-      "SELECT * FROM {{table_name}} WHERE {{primary_key}} = ?"
-    );
+    try
+    {
+        PreparedStatement queryById = connectionDatabase.prepareStatement(
+          "SELECT * FROM {{table_name}} WHERE {{primary_key}} = ?"
+        );
     
-    queryById.setInt(1, id);
+        queryById.setInt(1, id);
 
-    ResultSet recordings = queryById.executeQuery();
+        ResultSet recordings = queryById.executeQuery();
 
-    boolean noRecordingFound = !recordings.next();
+        boolean noRecordingFound = !recordings.next();
 
-    {{entity}} recording = new {{entity}}();
+        {{entity}} recording = new {{entity}}();
 
-    if (noRecordingFound) return recording;
+        if (noRecordingFound) return recording;
 
-    recording.set{{pascal_primary_key}}(recordings.getInt("{{primary_key}}"));
-    
-    {% for  name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(recordings.get{{details["type_pascal"]}}("{{name}}"));
-    {% endfor %}
-    return recording;
+        recording.set{{pascal_primary_key}}(recordings.getInt("{{primary_key}}"));
+
+        {% for  name, details in insert_columns.items() %}recording.set{{details["pascal"]}}(recordings.get{{details["type_pascal"]}}("{{name}}"));
+        {% endfor %}
+        return recording;
+    }
+    catch(SQLException e)
+    {
+        System.out.println("Error : " + e.getMessage());
+        return new {{entity}}();
+    }
   }
 
-  public void save({{entity}} recording) throws SQLException {
+  public void save({{entity}} recording) {
     Connection connectionDatabase = Database.getConnection();
 
     boolean weEditRecording = recording.get{{pascal_primary_key}}() != 0;
@@ -98,24 +127,43 @@ public class {{class_name}}
       ? "UPDATE {{table_name}} SET {{update_elements}} WHERE {{primary_key}} = ?"
       : "INSERT INTO {{table_name}}({{update_columns}}) VALUES({{update_question_marks}})";
 
-    PreparedStatement querySave = connectionDatabase.prepareStatement(queryToExecute);
-    {% for  name, details in insert_columns.items() %}querySave.set{{details["type_pascal"]}}({{loop.index}}, recording.get{{details["pascal"]}}());
-    {% endfor %}
-    if (weEditRecording)
-      querySave.setInt({{insert_columns|length + 1}}, recording.get{{pascal_primary_key}}());
+    try
+    {
 
-    querySave.executeUpdate();
+        PreparedStatement querySave = connectionDatabase.prepareStatement(queryToExecute);
+        {% for  name, details in insert_columns.items() %}querySave.set{{details["type_pascal"]}}({{loop.index}}, recording.get{{details["pascal"]}}());
+        {% endfor %}
+        if (weEditRecording)
+        querySave.setInt({{insert_columns|length + 1}}, recording.get{{pascal_primary_key}}());
+
+      querySave.executeUpdate();
+    }
+    catch(SQLException e)
+    {
+      System.out.println("Error : " + e.getMessage());
+    }
   }
 
-  public void delete(int id) throws SQLException {
+  public void delete(int id) {
     Connection connectionDatabase = Database.getConnection();
 
-    PreparedStatement query = connectionDatabase.prepareStatement(
+
+
+    try 
+    {
+
+      PreparedStatement query = connectionDatabase.prepareStatement(
       "DELETE FROM {{table_name}} WHERE {{primary_key}} = ?"
-    );
+      );
 
-    query.setInt(1, id); 
+       query.setInt(1, id); 
 
-    query.executeUpdate();
+      query.executeUpdate();
+    }
+    catch(SQLException e)
+    {
+      System.out.println("Error : " + e.getMessage());
+    }
+
   }
 }
