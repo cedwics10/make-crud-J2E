@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -38,6 +39,11 @@ public class Admin{{entity}}Delete extends HttpServlet {
 
 			response.sendRedirect("Admin{{entity}}");
 		} 
+		catch(SQLException e)
+		{
+			System.out.println("Erreur requête : " + e.getMessage());
+			response.sendRedirect("AdminIndex");
+		}
 		catch (NumberFormatException ex)
 		{
 			response.sendRedirect("AdminIndex");

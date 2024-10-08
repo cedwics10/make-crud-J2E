@@ -13,7 +13,7 @@ public class {{class_name}}
 {
   int ITEM_PER_PAGE = 20;
 
-  public ArrayList<{{entity}}> getAll()
+  public ArrayList<{{entity}}> getAll() throws SQLException
   {
     Database.makeConnection();
     Connection connectionDatabase = Database.getConnection();
@@ -49,7 +49,7 @@ public class {{class_name}}
     }
   }
 
-  public ArrayList<{{entity}}> getPage(int page) throws SQLException 
+  public ArrayList<{{entity}}> getPage(int page) throws SQLException
   {
     Database.makeConnection();
     Connection connectionDatabase = Database.getConnection();
@@ -59,7 +59,7 @@ public class {{class_name}}
     try
     {
       Statement queryAll = connectionDatabase.createStatement();
-      ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}} ORDER BY id ASC LIMIT " + (page * ITEM_PER_PAGE) + ", " + ITEM_PER_PAGE);
+      ResultSet results = queryAll.executeQuery("SELECT * FROM {{table_name}} ORDER BY {{primary_key}} ASC LIMIT " + (page * ITEM_PER_PAGE) + ", " + ITEM_PER_PAGE);
 
       boolean noResultExists = !results.next();
 
@@ -85,7 +85,7 @@ public class {{class_name}}
 
   }
 
-  public {{entity}} getById(int id) {
+  public {{entity}} getById(int id) throws SQLException {
 
     Connection connectionDatabase = Database.getConnection();
 
@@ -118,7 +118,7 @@ public class {{class_name}}
     }
   }
 
-  public void save({{entity}} recording) {
+  public void save({{entity}} recording) throws SQLException {
     Connection connectionDatabase = Database.getConnection();
 
     boolean weEditRecording = recording.get{{pascal_primary_key}}() != 0;
@@ -144,7 +144,7 @@ public class {{class_name}}
     }
   }
 
-  public void delete(int id) {
+  public void delete(int id) throws SQLException {
     Connection connectionDatabase = Database.getConnection();
 
 

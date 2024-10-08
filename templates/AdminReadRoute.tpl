@@ -56,6 +56,7 @@ public class {{class_name}} extends HttpServlet {
 		}
 
 		request.setAttribute("records", records);
+		request.getRequestDispatcher("admin{{entity}}.jsp");
 	}
 
 	

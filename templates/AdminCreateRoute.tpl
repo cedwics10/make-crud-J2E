@@ -50,10 +50,19 @@ public class {{class_name}} extends HttpServlet {
 
 			entry.set{{pascal_primary_key}}(id);{% for name, details in insert_columns.items() %}
 			{% if details.type == "int" %}entry.set{{details.pascal}}(Integer.parseInt(request.getParameter("{{name}}")));
+			{% elif details.type == "boolean" %}entry.set{{details.pascal}}(Boolean.parseBoolean(request.getParameter("{{name}}")));
+			{% elif details.type == "double" %}entry.set{{details.pascal}}(Double.parseDouble(request.getParameter("{{name}}")));
 			{% else %}entry.set{{details.pascal}}(request.getParameter("{{name}}"));{% endif %}{% endfor %}
 
 			Dao{{entity}} dao = new Dao{{entity}}();
-			dao.save(entry);
+			try
+			{
+				dao.save(entry);
+			}
+			catch(SQLException e)
+			{
+				System.out.println("ERROR : " + e.getMessage());
+			}
 
 			response.sendRedirect("{{route_read}}");
 			return;

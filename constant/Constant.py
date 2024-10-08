@@ -5,4 +5,5 @@ class Constant:
     scripts_list = ["Dao", "Entity", 
             "AdminCreateRoute",
             "AdminReadRoute",
-            "AdminDeleteRoute"]
+            "AdminDeleteRoute",
+            "AdminReadJsp"]
