@@ -9,7 +9,7 @@ class AdminCreateRoute(Template):
         self.parameters.update({
             "path": "adminCreateRoute.tpl",
 
-            "folder" : "route",
+            "folder" : "java/controller",
 
             "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),

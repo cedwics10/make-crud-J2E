@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Game shop - {{entity}} - Liste</title>
+<title>Game shop - {{entity}} - Créer/Modifier</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>

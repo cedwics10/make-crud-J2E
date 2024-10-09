@@ -9,13 +9,13 @@ class AdminReadJsp(Template):
         self.parameters.update({
             "path": "AdminReadJsp.tpl",
 
-            "folder" : "jsp",
+            "folder" : "webapp",
 
             "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),
             "suffix": "",
 
-            "extension" : "java"
+            "extension" : "jsp"
         })
 
     def set_custom_parameters(self):

@@ -82,6 +82,7 @@ public class {{class_name}} extends HttpServlet {
 		}
 
 		request.setAttribute("record", record);
+		request.getRequestDispatcher("Admin{entity}New.jsp").forward(request, resposne);
 	}
 
 	

@@ -9,7 +9,7 @@ class AdminDeleteRoute(Template):
         self.parameters.update({
             "path": "AdminDeleteRoute.tpl",
 
-            "folder" : "route",
+            "folder" : "java/controller",
 
             "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),

@@ -9,9 +9,9 @@ class AdminCreateJsp(Template):
         self.parameters.update({
             "path": "adminCreateJsp.tpl",
 
-            "folder" : "jsp",
+            "folder" : "webapp",
 
-            "preffix": "admin",
+            "preffix": "Admin",
             "title": TextParser.toPascalCase(table_name),
             "suffix": "New",
             
@@ -21,5 +21,5 @@ class AdminCreateJsp(Template):
     def set_custom_parameters(self):
         super().set_custom_parameters()
         self.output_parameters.update({
-            "route_read" : self.parameters["preffix"] + TextParser.toPascalCase(self.parameters['title'])
+            "route_read" : self.parameters["preffix"] + TextParser.toPascalCase(self.parameters['title']) + self.parameters["suffix"]
         })

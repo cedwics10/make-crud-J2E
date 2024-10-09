@@ -1,9 +1,9 @@
 class Constant:
     input_path = "input/tables.json"
-    output_folder = "output"
+    output_folder = "C:\clean-workspace\ecf_jeu\src\main"
 
-    scripts_list = ["Dao", "Entity", 
-            "AdminCreateRoute",
-            "AdminReadRoute",
-            "AdminDeleteRoute",
-            "AdminReadJsp"]
+    ''' "Dao", "Entity",  '''
+    scripts_list = ["AdminCreateRoute",
+                    "AdminReadRoute",
+                    "AdminDeleteRoute",
+                    "AdminReadJsp"]
