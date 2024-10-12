@@ -5,13 +5,13 @@
             "adm_pseudo": "string",
             "adm_passe": "string"
         },
-        "input" : {
-            "adm_pseudo" : {
-                "type" : "text"
+        "input": {
+            "adm_pseudo": {
+                "type": "text"
             },
-            "adm_passe" : {
+            "adm_passe": {
                 "type": "password"
-            } 
+            }
         }
     },
     "utilisateur": {
@@ -25,29 +25,35 @@
             "uti_adresse": "string",
             "uti_actif": "boolean"
         },
-        "input" : {
+        "input": {
             "uti_pseudo": {
-                "type" : "text"
+                "type": "text"
             },
             "uti_mail": {
-                "type" : "text"
+                "type": "text"
             },
             "uti_passe": {
-                "type" : "password"
+                "type": "password"
             },
             "uti_nom": {
-                "type" : "text"
+                "type": "text"
             },
             "uti_prenom": {
-                "type" : "text"
+                "type": "text"
             },
             "uti_adresse": {
-                "type" : "textarea"
+                "type": "textarea"
             },
             "uti_actif": {
-                "type" : "radio",
-                "keys" : ["Actif", "Inactif"],
-                "values" : [0,1]
+                "type": "radio",
+                "keys": [
+                    "Actif",
+                    "Inactif"
+                ],
+                "values": [
+                    0,
+                    1
+                ]
             }
         }
     },
@@ -63,22 +69,22 @@
         },
         "input": {
             "jeu_titre": {
-                "type" : "text"
+                "type": "text"
             },
             "jeu_prix": {
-                "type" : "number"
+                "type": "number"
             },
             "jeu_description": {
-                "type" : "textarea"
+                "type": "textarea"
             },
             "jeu_limite_age": {
-                "type" : "number"
+                "type": "number"
             },
             "jeu_date_sortie": {
-                "type" : "date"
+                "type": "date"
             },
             "jeu_developpeur": {
-                "type" : "text"
+                "type": "text"
             }
         }
     },
@@ -89,7 +95,7 @@
         },
         "input": {
             "cat_nom": {
-                "type" : "text"
+                "type": "text"
             }
         }
     },
@@ -98,9 +104,9 @@
         "columns": {
             "gen_nom": "string"
         },
-        "input" : {
-            "gen_nom" : {
-                "type" : "text"
+        "input": {
+            "gen_nom": {
+                "type": "text"
             }
         }
     },
@@ -109,9 +115,9 @@
         "columns": {
             "mod_nom": "string"
         },
-        "input" : {
-            "mod_nom" : {
-                "type" : "text"
+        "input": {
+            "mod_nom": {
+                "type": "text"
             }
         }
     },
@@ -120,9 +126,9 @@
         "columns": {
             "pla_nom": "string"
         },
-        "input" : {
-            "pla_nom" : {
-                "type" : "text"
+        "input": {
+            "pla_nom": {
+                "type": "text"
             }
         }
     },
@@ -131,9 +137,9 @@
         "columns": {
             "lan_nom": "string"
         },
-        "input" : {
-            "lan_nom" : {
-                "type" : "text"
+        "input": {
+            "lan_nom": {
+                "type": "text"
             }
         }
     },
@@ -143,211 +149,302 @@
             "etr_genre": "int",
             "etr_jeu": "int"
         },
-        "input" : {
-            "etre_genre" : {
-                "type" : "text"
+        "references": {
+            "etr_genre": {
+                "table" : "genre",
+                "column" : "gen_nom"
             },
             "etr_jeu": {
-                "type" : "select",
-                "table" : "jeu"
+                "table" : "jeu",
+                "column" : "jeu_titre"
+            }
+        },
+        "input": {
+            "etre_genre": {
+                "type": "text"
+            },
+            "etr_jeu": {
+                "type": "select",
+                "table": "jeu"
             }
         }
     },
     "collaborer": {
-        "primary_key" : "col_id",
-        "columns" : {
+        "primary_key": "col_id",
+        "columns": {
             "col_mode": "int",
-            "col_jeu" : "int"
+            "col_jeu": "int"
         },
-        "input" : {
-            "col_mode" : {
-                "type" : "select",
-                "table" : "mode"
+        "references": {
+            "col_mode": {
+                "table" : "mode",
+                "column" : "mod_titre"
+            },
+            "col_jeu":
+            {
+                "table" : "jeu",
+                "column" : "jeu_titre"
+            }
+        },
+        "input": {
+            "col_mode": {
+                "type": "select",
+                "table": "mode"
             },
             "col_jeu": {
-                "type" : "select",
-                "table" : "jeu"
+                "type": "select",
+                "table": "jeu"
             }
         }
     },
     "appartenir": {
-        "primary_key" : "app_id",
-        "columns" : {
+        "primary_key": "app_id",
+        "columns": {
             "app_jeu": "int",
-            "app_plateforme" : "int"
+            "app_plateforme": "int"
         },
-        "input" : {
-            "app_jeu" : {
-                "type" : "select",
-                "table" : "jeu"
+        "references": {
+            "app_plateforme": {
+                "table" : "plateforme",
+                "column" : "pla_nom"
             },
-            "app_plateforme" : {
-                "type" : "select",
-                "table" : "pla"
-            }   
+            "app_jeu": {
+                "table" : "jeu",
+                "column" : "jeu_titre"
+            }
+        },
+        "input": {
+            "app_jeu": {
+                "type": "select",
+                "table": "jeu"
+            },
+            "app_plateforme": {
+                "type": "select",
+                "table": "pla"
+            }
         }
     },
-    "illustration" : {
-        "primary_key" : "ill_id",
-        "columns" : {
-            "ill_type" : "string",
+    "illustration": {
+        "primary_key": "ill_id",
+        "columns": {
+            "ill_type": "string",
             "ill_lien": "string",
-            "ill_ordre" : "int",
-            "ill_jeu" : "int",
-            "ill_date" : "string"
+            "ill_ordre": "int",
+            "ill_jeu": "int",
+            "ill_date": "string"
         },
-        "input" : {
-            "ill_type" : {
-                "type" : "select",
-                "table" : "type"
+        "references": {
+            "ill_jeu": {
+                "table": "jeu",
+                "select": "jeu_titre"
+            }
+        },
+        "input": {
+            "ill_type": {
+                "type": "select",
+                "table": "type"
             },
-            "ill_jeu" : {
-                "type" : "select",
-                "table" : "jeu"
+            "ill_jeu": {
+                "type": "select",
+                "table": "jeu"
             },
             "ill_lien": {
-                "type" : "text"
+                "type": "text"
             },
-            "ill_ordre" : {
-                "type" : "number"
+            "ill_ordre": {
+                "type": "number"
             },
-            "ill_date" : {
-                "type" : "date"
-            }  
-        }
-    },
-    "commentaire" : {
-        "primary_key" : "com_id",
-        "columns":{
-            "com_utilisateur" : "int",
-            "com_jeu" : "int",
-            "com_titre" : "string",
-            "com_texte" : "string"
-        },
-        "input" : {
-            "com_utilisateur" : {
-                "type" : "select",
-                "table" : "utilisateur"
-            },
-            "com_jeu" : {
-                "type" : "select",
-                "table" : "jeu"
-            },
-            "com_titre" : {
-                "type" : "input"
-            },
-            "com_texte" : {
-                "type" : "textarea"
-            } 
-        }
-    },
-    "evaluation" : {
-        "primary_key" : "eva_id",
-        "columns" : {
-            "eva_note" : "int",
-            "eva_jeu" : "int",
-            "eva_utilisateur" : "int"
-        },
-        "input" : {
-            "eva_note" : {
-                "type" : "number"
-            },
-            "eva_jeu" : {
-                "type" : "select",
-                "table" : "jeu"
-            },
-            "eva_utilisateur" : {
-                "type" : "select",
-                "table" : "utilisateur"
+            "ill_date": {
+                "type": "date"
             }
         }
     },
-    "se_renseigner" : {
-        "primary_key" : "ser_id",
-        "columns" : {
-            "ser_date" : "string",
-            "ser_nombre_visites" : "int",
-            "ser_jeu" : "int",
-            "ser_utilisateur" : "int"
+    "commentaire": {
+        "primary_key": "com_id",
+        "columns": {
+            "com_utilisateur": "int",
+            "com_jeu": "int",
+            "com_titre": "string",
+            "com_texte": "string"
         },
-        "input" : {
-            "ser_date" : {
-                "type" : "date"
+        "references": {
+            "com_utilisateur": {
+                "table": "utilisateur",
+                "column": "uti_pseudo"
+            }
+        },
+        "input": {
+            "com_utilisateur": {
+                "type": "select",
+                "table": "utilisateur"
             },
-            "ser_nombre_visites" :  {
-                "type" : "number"
+            "com_jeu": {
+                "type": "select",
+                "table": "jeu"
             },
-            "ser_jeu" : {
-                "type" : "select",
-                "table" : "jeu"
+            "com_titre": {
+                "type": "input"
+            },
+            "com_texte": {
+                "type": "textarea"
+            }
+        }
+    },
+    "evaluation": {
+        "primary_key": "eva_id",
+        "columns": {
+            "eva_note": "int",
+            "eva_jeu": "int",
+            "eva_utilisateur": "int"
+        },
+        "references": {
+            "eva_jeu": {
+                "table": "jeu",
+                "column": "jeu_titre"
+            },
+            "eva_utilisateur": {
+                "table": "utilisateur",
+                "column": "uti_pseudo"
+            }
+        },
+        "input": {
+            "eva_note": {
+                "type": "number"
+            },
+            "eva_jeu": {
+                "type": "select"
+            },
+            "eva_utilisateur": {
+                "type": "select"
+            }
+        }
+    },
+    "se_renseigner": {
+        "primary_key": "ser_id",
+        "columns": {
+            "ser_date": "string",
+            "ser_nombre_visites": "int",
+            "ser_jeu": "int",
+            "ser_utilisateur": "int"
+        },
+        "references": {
+            "ser_jeu": {
+                "table": "jeu",
+                "column": "jeu_titre"
             },
             "ser_utilisateur": {
-                "type" : "select",
-                "table" : "utilisateur"
+                "table": "utilisateur",
+                "column": "uti_pseudo"
             }
-        }
-    },
-    "achat" : {
-        "primary_key" : "ach_id",
-        "columns" : {
-            "ach_methode" : "string",
-            "ach_date" : "string",
-            "ach_utilisateur" : "int"
         },
-        "input" : {
-            "ach_method" : {
-                "type" : "text"
+        "input": {
+            "ser_date": {
+                "type": "date"
             },
-            "ach_date" : {
-                "type" : "date"
+            "ser_nombre_visites": {
+                "type": "number"
             },
-            "ach_utilisateur" : {
-                "type" : "select",
-                "table" : "utilisateur"
+            "ser_jeu": {
+                "type": "select",
+                "table": "jeu"
+            },
+            "ser_utilisateur": {
+                "type": "select",
+                "table": "utilisateur"
             }
         }
     },
-    "detail" : {
-        "primary_key" : "det_id",
-        "columns" : {
-            "det_achat" : "int",
+    "achat": {
+        "primary_key": "ach_id",
+        "columns": {
+            "ach_methode": "string",
+            "ach_date": "string",
+            "ach_utilisateur": "int"
+        },
+        "references": {
+            "ach_utilisateur": {
+                "table": "utilisateur",
+                "column": "uti_pseudo"
+            }
+        },
+        "input": {
+            "ach_method": {
+                "type": "text"
+            },
+            "ach_date": {
+                "type": "date"
+            },
+            "ach_utilisateur": {
+                "type": "select",
+                "table": "utilisateur"
+            }
+        }
+    },
+    "detail": {
+        "primary_key": "det_id",
+        "columns": {
+            "det_achat": "int",
             "det_jeu": "int",
-            "det_utilisateur" : "int",
-            "det_prix_unitaire" : "double",
-            "det_quantite" : "int"
+            "det_utilisateur": "int",
+            "det_prix_unitaire": "double",
+            "det_quantite": "int"
         },
-        "input" : {
-            "det_jeu" : {
-                "type" : "select",
-                "table" : "jeu"
+        "references": {
+            "det_achat": {
+                "table": "achat",
+                "column": "ach_id"
             },
-            "det_utilisateur" : {
-                "type" : "select",
-                "table" : "utilisateur"
+            "det_jeu": {
+                "table": "jeu",
+                "column": "jeu_titre"
             },
-            "det_prix_unitaire" : {
-                "type" : "number",
-                "step" : 0.01
+            "det_utilisateur": {
+                "table": "utilisateur",
+                "column": "uti_pseudo"
+            }
+        },
+        "input": {
+            "det_jeu": {
+                "type": "select",
+                "table": "jeu"
             },
-            "det_quantite" : {
-                "type" : "number"
+            "det_utilisateur": {
+                "type": "select",
+                "table": "utilisateur"
+            },
+            "det_prix_unitaire": {
+                "type": "number",
+                "step": 0.01
+            },
+            "det_quantite": {
+                "type": "number"
             }
         }
     },
-    "disponible" : {
-        "primary_key" : "dis_id",
-        "columns" : {
-            "dis_jeu" : "int",
-            "dis_plateforme":"int"
+    "disponible": {
+        "primary_key": "dis_id",
+        "columns": {
+            "dis_jeu": "int",
+            "dis_plateforme": "int"
         },
-        "input" : {
-            "dis_jeu" : {
-                "type" : "select",
-                "table" : "plateforme"
+        "references": {
+            "dis_jeu": {
+                "table": "jeu",
+                "column": "jeu_titre"
             },
-            "dis_plateforme" : {
-                "type" : "select",
-                "table" : "plateforme"
+            "dis_plateforme": {
+                "table": "plateforme",
+                "column": "pla_nom"
+            }
+        },
+        "input": {
+            "dis_jeu": {
+                "type": "select",
+                "table": "plateforme"
+            },
+            "dis_plateforme": {
+                "type": "select",
+                "table": "plateforme"
             }
         }
     }

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from functools import reduce
 
 from jinja2 import Environment, FileSystemLoader
 from utils.TextParser import TextParser
@@ -9,6 +10,8 @@ Description : this class is abstract.
 It gives the base to set the details
 of the template
 '''
+
+
 class Template(ABC):
     folder = ""
 
@@ -20,9 +23,10 @@ class Template(ABC):
             "table_name": table_name,
 
             "primary_key": table_details["primary_key"],
-            
+
             "columns": table_details["columns"],
-            "input" : table_details["input"]
+            "references":  table_details["references"] if "references" in table_details.keys() else {},
+            "input": table_details["input"]
         }
 
         self.output_parameters = {}
@@ -50,14 +54,15 @@ class Template(ABC):
         self.output_parameters.update({
             "table_name": self.parameters["table_name"],
 
-            "preffix" : self.parameters["preffix"],
-            "suffix" : self.parameters["preffix"],
+            "preffix": self.parameters["preffix"],
+            "suffix": self.parameters["preffix"],
 
             "entity": TextParser.toPascalCase(self.parameters["table_name"]),
             "class_name": self.parameters["preffix"] + TextParser.toPascalCase(self.parameters["table_name"]) + self.parameters["suffix"],
 
+            "references": self.parameters["references"],
             "primary_key": self.parameters["primary_key"],
-            "camel_primary_key" : TextParser.toCamelCase(self.parameters["primary_key"]),
+            "camel_primary_key": TextParser.toCamelCase(self.parameters["primary_key"]),
             "pascal_primary_key": TextParser.toPascalCase(self.parameters["primary_key"])
         })
 
@@ -66,12 +71,12 @@ class Template(ABC):
                 column_name: {
                     "pascal": TextParser.toPascalCase(column_name),
                     "type": TextParser.toCamelCase(column_type),
-                    "type_min" : TextParser.setTypeCase(column_type),
+                    "type_min": TextParser.setTypeCase(column_type),
                     "type_pascal": TextParser.toPascalCase(column_type),
                     "index": 1
                 } for column_name, column_type in self.parameters["columns"].items()
             },
-            "input" : self.parameters["input"]
+            "input": self.parameters["input"]
         })
 
     @abstractmethod

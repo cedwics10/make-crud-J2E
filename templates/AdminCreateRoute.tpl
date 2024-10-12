@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao{{entity}};
 import dao.{{entity}};
+
+{% for depedency in references.values() %}
+import dao.Dao{{depedency.table|capitalize}};
+{% endfor %}
 
 /**
  * Servlet implementation class Index
@@ -79,6 +83,14 @@ public class {{class_name}} extends HttpServlet {
 		catch(SQLException e)
 		{
 			System.out.println("Grosse erreur : " + e.getMessage());
+		}
+
+		try
+		{
+			{% for details in references.values() %}request.setAttribute("{{details.table|capitalize}}", new Dao{{details.table|capitalize}}().getAll());
+			{% endfor %}} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		request.setAttribute("record", record);
