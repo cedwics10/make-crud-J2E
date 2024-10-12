@@ -42,10 +42,12 @@ public class {{class_name}} extends HttpServlet {
 			id = 0;
 		}
 
-		boolean submitButtonPressed = request.getParameter("submit") != null;
+		boolean submitButtonPressed = request.getParameter("envoyer") != null;
 
 		if(submitButtonPressed)
 		{
+			System.out.println("Bouton envoyé pressé !");
+
 			{{entity}} entry = new {{entity}}();
 
 			entry.set{{pascal_primary_key}}(id);{% for name, details in insert_columns.items() %}
@@ -58,14 +60,17 @@ public class {{class_name}} extends HttpServlet {
 			try
 			{
 				dao.save(entry);
+				response.sendRedirect("Admin{{entity}}");
+				return;
 			}
 			catch(SQLException e)
 			{
 				System.out.println("ERROR : " + e.getMessage());
 			}
-
-			response.sendRedirect("{{route_read}}");
-			return;
+		}
+		else
+		{
+			System.out.println("Bouton envoyer pas pressé !");
 		}
 
 		Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
@@ -78,19 +83,22 @@ public class {{class_name}} extends HttpServlet {
 		}
 		catch(SQLException e)
 		{
-			System.out.println("ERROR : " + e.getMessage());
+			System.out.println("Grosse erreur : " + e.getMessage());
 		}
 
 		request.setAttribute("record", record);
-		request.getRequestDispatcher("Admin{entity}New.jsp").forward(request, resposne);
+		request.getRequestDispatcher("Admin{{entity}}New.jsp").forward(request, response);
 	}
 
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
-
 }
