@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="dao.{{entity}}" %>
+<% ArrayList<{{entity}}> records = new ArrayList<{{entity}}>();
+records = (ArrayList<{{entity}}>) request.getAttribute("records"); %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +16,18 @@
 
 <table>
     <thead>
-        <td>Id</td>
-        <td>Nom</td>
+        {% for name, details in insert_columns.items() %}<td>{{name}}</td>{% endfor %}
+        <td>Supprimer</td>
     </thead>
     <tbody>
+    <% for({{entity}} entry : records) { %>
         <tr>
-            <td>1</td>
-            <td>Jean</td>
+        {% for name, details in insert_columns.items() %}
+            <td><%=entry.get{{details.pascal}}()%></td>
+        {% endfor %}
+        <td>D</td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Jean</td>
-        </tr>
+    <% } %>
     </tbody>
 </table>
 </body>
