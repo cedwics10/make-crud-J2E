@@ -16,12 +16,14 @@ records = (ArrayList<{{entity}}>) request.getAttribute("records"); %>
 
 <table>
     <thead>
+        <td>{{primary_key}}</td>
         {% for name, details in insert_columns.items() %}<td>{{name}}</td>{% endfor %}
         <td>Supprimer</td>
     </thead>
     <tbody>
     <% for({{entity}} entry : records) { %>
         <tr>
+            <td><%=entry.get{{pascal_primary_key}}()%></td>
         {% for name, details in insert_columns.items() %}
             <td><%=entry.get{{details.pascal}}()%></td>
         {% endfor %}

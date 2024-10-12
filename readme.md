@@ -36,6 +36,8 @@ Go to the file constant/Constnat.py
 
    - {{entity}} : name of the table
    - {{class_name}} : name of the generated class/route
+   - {{primary_key}} : get the value of the primary key
+   - {{pascal_primary_key}} : get the pascal case vaue of the primary key
    - {% for name, details in insert_columns.items() %} {% endfor %} : iterate over columns of a specific entity
      - {details.pascal} : get the pascal name of the attrobite
      - {details.type} : get the gross type of a column
