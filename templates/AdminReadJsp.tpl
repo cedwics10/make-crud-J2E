@@ -29,6 +29,7 @@ records = (ArrayList<{{entity}}>) request.getAttribute("records"); %>
         </tr>
     <% } %>
     </tbody>
-</table>
+</table><br />
+<a href="{{preffix}}{{entity}}New">Créer un nouvel {{entity}}</a>
 </body>
 </html>

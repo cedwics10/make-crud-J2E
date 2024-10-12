@@ -46,8 +46,6 @@ public class {{class_name}} extends HttpServlet {
 
 		if(submitButtonPressed)
 		{
-			System.out.println("Bouton envoyé pressé !");
-
 			{{entity}} entry = new {{entity}}();
 
 			entry.set{{pascal_primary_key}}(id);{% for name, details in insert_columns.items() %}
@@ -66,11 +64,8 @@ public class {{class_name}} extends HttpServlet {
 			catch(SQLException e)
 			{
 				System.out.println("ERROR : " + e.getMessage());
+				return;
 			}
-		}
-		else
-		{
-			System.out.println("Bouton envoyer pas pressé !");
 		}
 
 		Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
@@ -87,6 +82,8 @@ public class {{class_name}} extends HttpServlet {
 		}
 
 		request.setAttribute("record", record);
+		request.setAttribute("id", Integer.toString(record.get{{pascal_primary_key}}()));
+
 		request.getRequestDispatcher("Admin{{entity}}New.jsp").forward(request, response);
 	}
 

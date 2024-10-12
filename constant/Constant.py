@@ -15,4 +15,6 @@ class Constant:
     # List of all scripts
     scripts_list = [
         "AdminReadRoute",
+        "AdminCreateRoute",
+        "AdminCreateJsp",
         "AdminReadJsp"]

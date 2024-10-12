@@ -20,6 +20,7 @@ class Template(ABC):
             "table_name": table_name,
 
             "primary_key": table_details["primary_key"],
+            
             "columns": table_details["columns"],
             "input" : table_details["input"]
         }
@@ -48,6 +49,10 @@ class Template(ABC):
     def __set_base_parameters(self):
         self.output_parameters.update({
             "table_name": self.parameters["table_name"],
+
+            "preffix" : self.parameters["preffix"],
+            "suffix" : self.parameters["preffix"],
+
             "entity": TextParser.toPascalCase(self.parameters["table_name"]),
             "class_name": self.parameters["preffix"] + TextParser.toPascalCase(self.parameters["table_name"]) + self.parameters["suffix"],
 
