@@ -48,8 +48,20 @@ String id = (String) request.getAttribute("id"); %>
             <input type="number" name="{{name}}" step="1" min="0" value="<%=record.get{{details.pascal}}() %>"/>
             {% endif %}
         {% elif details.type_min == "double" %}<input type="number" name="{{name}}" step="0.01" value="<%=record.get{{details.pascal}}() %>"/>
-        {% elif details.type_min == "boolean" %}Oui : <input type="radio" name="{{name}}" value="1">, Non : <input type="radio" name="{{name}}" value="0">
+        {% elif details.type_min == "boolean" %}
+        <% 
+            String checked = "";
+            String checked2 = "checked";
+            if(record.get{{details.pascal}}())
+            { 
+                checked = "checked";
+                checked2 = "";
+            }
+            System.out.println("valeur du machin : " + record.get{{details.pascal}}());
+        %>
+        Oui : <input type="radio" name="{{name}}" value="true" <%=checked%>>, Non : <input type="radio" name="{{name}}" value="false" <%=checked2%>>
         {% else %}<input type="text" name="{{name}}" value="<%=(record.get{{details.pascal}}() == null) ? "" : record.get{{details.pascal}}() %>"/>{% endif %}
+        <br />
     {% endfor %}
 
     <input type="hidden" name="id" value="<%=id%>" />
