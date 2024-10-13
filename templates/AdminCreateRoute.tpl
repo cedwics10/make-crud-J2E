@@ -91,7 +91,7 @@ public class {{class_name}} extends HttpServlet {
 		try
 		{
 			Dao{{details.table|capitalize}} dao{{details.table|capitalize}} = new Dao{{details.table|capitalize}}();
-			ArrayList<{{details.table|capitalize}} > data{{details.table|capitalize}} = dao{{details.table|capitalize}}.getAll();
+			ArrayList<{{details.table|capitalize}}> data{{details.table|capitalize}} = dao{{details.table|capitalize}}.getAll();
 			request.setAttribute("{{details.table|capitalize}}", data{{details.table|capitalize}});
 		}
 		catch (SQLException e) {

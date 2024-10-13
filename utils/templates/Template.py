@@ -60,7 +60,16 @@ class Template(ABC):
             "entity": TextParser.toPascalCase(self.parameters["table_name"]),
             "class_name": self.parameters["preffix"] + TextParser.toPascalCase(self.parameters["table_name"]) + self.parameters["suffix"],
 
-            "references": self.parameters["references"],
+            "references": {
+                name : {
+                    "primary": value["primary"],
+                    "primary_pascal" : TextParser.toPascalCase(value["primary"]),
+                    "column" : value["column"],
+                    "column_pascal" : TextParser.toPascalCase(value["column"]),
+                    "table" : value["table"]
+                }
+                for name, value in self.parameters["references"].items()}
+            ,
             "primary_key": self.parameters["primary_key"],
             "camel_primary_key": TextParser.toCamelCase(self.parameters["primary_key"]),
             "pascal_primary_key": TextParser.toPascalCase(self.parameters["primary_key"])

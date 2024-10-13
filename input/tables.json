@@ -151,12 +151,14 @@
         },
         "references": {
             "etr_genre": {
-                "table" : "genre",
-                "column" : "gen_nom"
+                "table": "genre",
+                "column": "gen_nom",
+                "primary": "gen_id"
             },
             "etr_jeu": {
-                "table" : "jeu",
-                "column" : "jeu_titre"
+                "table": "jeu",
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             }
         },
         "input": {
@@ -177,13 +179,14 @@
         },
         "references": {
             "col_mode": {
-                "table" : "mode",
-                "column" : "mod_titre"
+                "table": "mode",
+                "column": "mod_titre",
+                "primary": "mod_id"
             },
-            "col_jeu":
-            {
-                "table" : "jeu",
-                "column" : "jeu_titre"
+            "col_jeu": {
+                "table": "jeu",
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             }
         },
         "input": {
@@ -205,12 +208,14 @@
         },
         "references": {
             "app_plateforme": {
-                "table" : "plateforme",
-                "column" : "pla_nom"
+                "table": "plateforme",
+                "column": "pla_nom",
+                "primary": "pla_id"
             },
             "app_jeu": {
-                "table" : "jeu",
-                "column" : "jeu_titre"
+                "table": "jeu",
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             }
         },
         "input": {
@@ -236,7 +241,8 @@
         "references": {
             "ill_jeu": {
                 "table": "jeu",
-                "select": "jeu_titre"
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             }
         },
         "input": {
@@ -270,7 +276,8 @@
         "references": {
             "com_utilisateur": {
                 "table": "utilisateur",
-                "column": "uti_pseudo"
+                "column": "uti_pseudo",
+                "primary": "uti_id"
             }
         },
         "input": {
@@ -300,11 +307,13 @@
         "references": {
             "eva_jeu": {
                 "table": "jeu",
-                "column": "jeu_titre"
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             },
             "eva_utilisateur": {
                 "table": "utilisateur",
-                "column": "uti_pseudo"
+                "column": "uti_pseudo",
+                "primary": "uti_id"
             }
         },
         "input": {
@@ -330,11 +339,13 @@
         "references": {
             "ser_jeu": {
                 "table": "jeu",
-                "column": "jeu_titre"
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             },
             "ser_utilisateur": {
                 "table": "utilisateur",
-                "column": "uti_pseudo"
+                "column": "uti_pseudo",
+                "primary": "uti_id"
             }
         },
         "input": {
@@ -364,7 +375,8 @@
         "references": {
             "ach_utilisateur": {
                 "table": "utilisateur",
-                "column": "uti_pseudo"
+                "column": "uti_pseudo",
+                "primary": "uti_id"
             }
         },
         "input": {
@@ -392,15 +404,18 @@
         "references": {
             "det_achat": {
                 "table": "achat",
-                "column": "ach_id"
+                "column": "ach_id",
+                "primary": "ach_id"
             },
             "det_jeu": {
                 "table": "jeu",
-                "column": "jeu_titre"
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             },
             "det_utilisateur": {
                 "table": "utilisateur",
-                "column": "uti_pseudo"
+                "column": "uti_pseudo",
+                "primary": "uti_id"
             }
         },
         "input": {
@@ -430,11 +445,13 @@
         "references": {
             "dis_jeu": {
                 "table": "jeu",
-                "column": "jeu_titre"
+                "column": "jeu_titre",
+                "primary": "jeu_id"
             },
             "dis_plateforme": {
                 "table": "plateforme",
-                "column": "pla_nom"
+                "column": "pla_nom",
+                "primary": "pla_id"
             }
         },
         "input": {

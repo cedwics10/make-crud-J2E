@@ -35,8 +35,8 @@ String id = (String) request.getAttribute("id"); %>
     {% elif details.type_min == "int" %}
     {% if name in references.keys() %}
     <select name="{{name}}">
-        <% for({{references[name].table|capitalize}} item : {{references[name].table}}Data) { %>
-            <option name="item.get">OUI</option>
+        <% for({{references[name]["table"]|capitalize}} item : {{references[name]["table"]}}Data) { %>
+            <option value="<%=item.get{{references[name]["primary_pascal"]}}()%>"><%=item.get{{references[name]["column_pascal"]}}()%></option>
         <% } %>
     </select>
     {% else %}
