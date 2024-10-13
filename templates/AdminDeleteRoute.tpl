@@ -32,7 +32,7 @@ public class Admin{{entity}}Delete extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-			int index = Integer.parseInt(request.getParameter("page"));
+			int index = Integer.parseInt(request.getParameter("id"));
 			
 			Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
 			dao{{entity}}.delete(index);
