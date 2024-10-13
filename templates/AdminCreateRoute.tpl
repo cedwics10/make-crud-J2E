@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.ArrayList;
+
 import dao.Dao{{entity}};
 import dao.{{entity}};
 
 {% for depedency in references.values() %}
+import dao.{{depedency.table|capitalize}};
 import dao.Dao{{depedency.table|capitalize}};
 {% endfor %}
 
@@ -72,12 +75,11 @@ public class {{class_name}} extends HttpServlet {
 			}
 		}
 
-		Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
-		
 		{{entity}} record = new {{entity}}();
 
 		try
 		{
+			Dao{{entity}} dao{{entity}} = new Dao{{entity}}();
 			record = dao{{entity}}.getById(id);
 		}
 		catch(SQLException e)
@@ -85,13 +87,20 @@ public class {{class_name}} extends HttpServlet {
 			System.out.println("Grosse erreur : " + e.getMessage());
 		}
 
+		{% for details in references.values() %}
 		try
 		{
-			{% for details in references.values() %}request.setAttribute("{{details.table|capitalize}}", new Dao{{details.table|capitalize}}().getAll());
-			{% endfor %}} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			Dao{{details.table|capitalize}} dao{{details.table|capitalize}} = new Dao{{details.table|capitalize}}();
+			ArrayList<{{details.table|capitalize}} > data{{details.table|capitalize}} = dao{{details.table|capitalize}}.getAll();
+			request.setAttribute("{{details.table|capitalize}}", data{{details.table|capitalize}});
+		}
+		catch (SQLException e) {
+			request.setAttribute("{{details.table|capitalize}}", new ArrayList<{{details.table|capitalize}}>());
 			e.printStackTrace();
 		}
+		{% endfor %}
+
+		System.out.println(record);
 
 		request.setAttribute("record", record);
 		request.setAttribute("id", Integer.toString(record.get{{pascal_primary_key}}()));

@@ -76,6 +76,7 @@ class Template(ABC):
                     "index": 1
                 } for column_name, column_type in self.parameters["columns"].items()
             },
+            "reference_columns" : self.parameters["references"].items(),
             "input": self.parameters["input"]
         })
 

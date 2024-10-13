@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="dao.{{entity}}" %>
+{% for column, depedency in references.items() %}
+<%@page import="dao.{{depedency.table|capitalize}}" %>
+{% endfor %}
+<%@page import="java.util.ArrayList" %>
 <%
+
 {{entity}} record = new {{entity}}();
 record = ({{entity}}) request.getAttribute("record");
+
+System.out.println(record);
+
 {% for column, depedency in references.items() %}
-ArrayList<{{depedency["table"]|capitalize}}> {{depedency["table"]}}Data = new Dao{{depedency["table"] |capitalize}}();
-{{depedency["table"]}}Data = request.getAttribute("{{depedency["table"] |capitalize}}");{% endfor %}
+ArrayList<{{depedency["table"]|capitalize}}> {{depedency["table"]}}Data = new ArrayList<{{depedency["table"] |capitalize}}>();
+{{depedency["table"]}}Data = (ArrayList<{{depedency["table"] |capitalize}}>) request.getAttribute("{{depedency["table"] |capitalize}}");{% endfor %}
 
 
 String id = (String) request.getAttribute("id"); %>
@@ -18,6 +26,7 @@ String id = (String) request.getAttribute("id"); %>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
 <h1>{{entity}} : Créer/Éditer</h1>
 
 <form method="post" action="{{class_name}}">
@@ -26,8 +35,8 @@ String id = (String) request.getAttribute("id"); %>
     {% elif details.type_min == "int" %}
     {% if name in references.keys() %}
     <select name="{{name}}">
-        <% for({{references[name].table|capitalize}} item : {{references[name].table}}Data)) { %>
-            <option name="">OUI</option>
+        <% for({{references[name].table|capitalize}} item : {{references[name].table}}Data) { %>
+            <option name="item.get">OUI</option>
         <% } %>
     </select>
     {% else %}
