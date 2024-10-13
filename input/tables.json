@@ -180,7 +180,7 @@
         "references": {
             "col_mode": {
                 "table": "mode",
-                "column": "mod_titre",
+                "column": "mod_nom",
                 "primary": "mod_id"
             },
             "col_jeu": {

@@ -31,20 +31,25 @@ String id = (String) request.getAttribute("id"); %>
 
 <form method="post" action="{{class_name}}">
     {% for name, details in insert_columns.items() %}
-    {{name}} :{% if details.type_min == "String" %}<input type="text" name="{{name}}" value="<%=(record.get{{details.pascal}}() == null) ? "" : record.get{{details.pascal}}() %>"/>
-    {% elif details.type_min == "int" %}
-    {% if name in references.keys() %}
-    <select name="{{name}}">
-        <% for({{references[name]["table"]|capitalize}} item : {{references[name]["table"]}}Data) { %>
-            <option value="<%=item.get{{references[name]["primary_pascal"]}}()%>"><%=item.get{{references[name]["column_pascal"]}}()%></option>
-        <% } %>
-    </select>
-    {% else %}
-    <input type="number" name="{{name}}" step="1" min="0" value="<%=record.get{{details.pascal}}() %>"/>
-    {% endif %}
-    {% elif details.type_min == "double" %}<input type="number" name="{{name}}" step="1" value="<%=record.get{{details.pascal}}() %>"/>
-    {% elif details.type_min == "boolean" %}Oui : <input type="radio" name="{{name}}" value="1">, Non : <input type="radio" name="{{name}}" value="0">
-    {% else %}NOTHING : '{{details.type_min}}'{% endif %} <br />
+        {{name}} :
+        {% if details.type_min == "int" %}
+            {% if name in references.keys() %}
+            <select name="{{name}}">
+                <% for({{references[name]["table"]|capitalize}} item : {{references[name]["table"]}}Data) { %>
+                    <% 
+                        String selected = "";
+                        if(record.get{{details.pascal}}() == item.get{{references[name]["primary_pascal"]}}())
+                            selected = "selected";
+                    %>
+                    <option <%=selected%> value="<%=item.get{{references[name]["primary_pascal"]}}()%>"><%=item.get{{references[name]["column_pascal"]}}()%></option>
+                <% } %>
+            </select>
+            {% else %}
+            <input type="number" name="{{name}}" step="1" min="0" value="<%=record.get{{details.pascal}}() %>"/>
+            {% endif %}
+        {% elif details.type_min == "double" %}<input type="number" name="{{name}}" step="0.01" value="<%=record.get{{details.pascal}}() %>"/>
+        {% elif details.type_min == "boolean" %}Oui : <input type="radio" name="{{name}}" value="1">, Non : <input type="radio" name="{{name}}" value="0">
+        {% else %}<input type="text" name="{{name}}" value="<%=(record.get{{details.pascal}}() == null) ? "" : record.get{{details.pascal}}() %>"/>{% endif %}
     {% endfor %}
 
     <input type="hidden" name="id" value="<%=id%>" />
