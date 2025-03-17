@@ -1,5 +1,5 @@
 from constant.Constant import Constant
-
+import os
 
 class JavaFileSaver:
 
@@ -23,7 +23,9 @@ class JavaFileSaver:
             parameters["title"] + parameters["suffix"] + extension
 
         contentOutput = generator.get_output()
+        
+        os.makedirs(os.path.dirname(saved_file_path), exist_ok=True)
 
-        fileOuput = open(saved_file_path, "w+")
+        fileOuput = open(saved_file_path, "a")
         fileOuput.write(contentOutput)
         fileOuput.close()
