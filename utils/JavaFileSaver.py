@@ -24,7 +24,8 @@ class JavaFileSaver:
 
         contentOutput = generator.get_output()
         
-        os.makedirs(os.path.dirname(saved_file_path), exist_ok=True)
+        file_absolute_dirname = os.path.dirname(saved_file_path)
+        os.makedirs(file_absolute_dirname, exist_ok=True)
 
         fileOuput = open(saved_file_path, "a")
         fileOuput.write(contentOutput)
